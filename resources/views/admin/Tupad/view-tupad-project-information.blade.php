@@ -16,6 +16,10 @@
                 </i>
                 Generate Report Project
             </a>
+            <a href="{{asset('/dashboard/add-tupad-form')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fa-regular fa-address-book text-white-50 mr-1"></i>
+                Add Beneficiary
+            </a>
             <a data-toggle="modal" data-target="#importTupadBeneficiaries" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fa fa-id-card fa-sm text-white-50">
 
