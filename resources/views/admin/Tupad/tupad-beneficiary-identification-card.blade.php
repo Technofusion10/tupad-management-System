@@ -107,7 +107,7 @@
     </p>
 
     <p class="text-address">
-        {{ $address }}
+        {{ $barangay }}, {{ $street }}, {{ $province }}, {{ $postal_code }}
     </p>
 
     <!--QrCode::size(250)->eye('circle')->generate($id) -->

@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TupadAnnouncement;
 use App\Models\TupadInformation;
 use App\Models\TupadEmployee;
-
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use PDF;
 
 class PDFController extends Controller
@@ -41,15 +41,19 @@ class PDFController extends Controller
             'last_name' => $beneficiary->last_name,
             'name_extension' => $beneficiary->name_extension,
             'birthdate' => $beneficiary->date_of_birth,
-            'address' => $beneficiary->complete_address,
+            'barangay' => $beneficiary->barangay,
+            'street' => $beneficiary->street,
+            'province' => $beneficiary->province,
+            'postal_code' => $beneficiary->postal_code,
             'date_today' => date('m/d/Y'),
             'qrcode' => $qrcode
         ];
 
         //$pdf = PDF::loadView('main.inventory.view_pdf', compact('qrcode'));
         //return $pdf->stream();
+        //$pdf = PDF::loadView('admin.Tupad.tupad-beneficiary-identification-card', $data);
 
-        $pdf = PDF::loadView('admin.Tupad.tupad-beneficiary-identification-card', $data);
+        $pdf = FacadePdf::loadView('admin.Tupad.tupad-beneficiary-identification-card', $data);
 
         return $pdf->stream();
 
