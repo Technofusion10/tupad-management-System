@@ -54,6 +54,17 @@ class HomeController extends Controller
         ->where('status', 'DENIED')
         ->sum('total_budget');
 
+        if($totalBudget == 0){
+            $percentage = 0;
+            return view('home', compact(
+                'countingTupadTotals',
+                'totalPendingBudget',
+                'totalApprovedBudget',
+                'totalDeniedBudget',
+                'percentage'
+            ));
+        }
+
         $percentage = ($totalApprovedBudget / $totalBudget) * 100;
 
 
