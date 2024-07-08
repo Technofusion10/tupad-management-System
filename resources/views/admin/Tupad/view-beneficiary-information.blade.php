@@ -16,6 +16,7 @@
                 </i>
                 View Project Info
             </a>
+
             <a href="{{ '/print-identification-card-tupad/'.$beneficiary->id }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fa fa-id-card fa-sm text-white-50">
 
@@ -147,7 +148,7 @@
                                     <i class="fa fa-thumbs-o-up fa-lg text-white-50">
 
                                     </i>
-                                    Approved Tupad Project
+                                    Approve Beneficiary
                                 </a>
                             </li>
 
@@ -156,7 +157,7 @@
                                     <i class="fa fa-thumbs-o-down fa-lg text-white-50">
 
                                     </i>
-                                    Denied Tupad Project
+                                    Deny Beneficiary
                                 </a>
                             </li>
 

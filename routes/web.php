@@ -38,7 +38,8 @@ Route::fallback(function () {
     }
 
     // Handle the 404 error for authenticated users
-    return response()->view('errors.404', [], 404);
+    // return response()->view('errors.404', [], 404);
+    return redirect()->route('home');
 });
 
 Route::get('/', function () {
