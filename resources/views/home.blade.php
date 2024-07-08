@@ -330,7 +330,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Pending Beneficiary Insurance Budget</div>
+                                    Pending Insurance Budget</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Php {{ number_format($totalPendingInsurance, 2) }}</div>
                             </div>
                             <div class="col-auto">
@@ -368,7 +368,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                    Denied Beneficiaries Insurance Budget</div>
+                                    Denied Insurance Budget</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Php {{ number_format($totalDeniedInsurance, 2) }}</div>
                             </div>
                             <div class="col-auto">
