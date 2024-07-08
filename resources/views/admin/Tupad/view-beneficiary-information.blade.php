@@ -293,7 +293,7 @@
                             </button>
 
                             <button name="submit" value="TSSD_REVIEW" type="submit" class="btn block btn-primary mt-2">
-                                Confirm 'Approved Tupad Project'
+                                Confirm 'Approved Tupad Beneficiary'
                             </button>
 
                         @endif
@@ -345,7 +345,7 @@
                         </button>
 
                         <button name="submit" value="DENIED" type="submit" class="btn block btn-primary mt-2">
-                            Confirmation 'Denied Tupad Project'
+                            Confirmation 'Denied Tupad Beneficiary'
                         </button>
 
                     </form>

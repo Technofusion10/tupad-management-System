@@ -54,9 +54,43 @@ class HomeController extends Controller
         ->where('status', 'DENIED')
         ->sum('total_budget');
 
-        if($totalBudget == 0){
+        //Beneficiary
+        $countingBeneficiaryTotals = DB::table('tupad_employees')
+        ->selectRaw('sum(total_insurance_amount) as totalBeneficiaryInsurance')
+        ->selectRaw("count(case when beneficiary_status = 'DENIED' then 1 end) as deniedBeneficiary")
+        ->selectRaw("count(case when beneficiary_status = 'PENDING' then 1 end) as pendingBeneficiary")
+        ->selectRaw("count(case when beneficiary_status = 'APPROVED' then 1 end) as approvedBeneficiary")
+        ->first();
+
+        $totalInsurance = DB::table('tupad_employees')
+        //->where('status', '!=', 'DENIED')
+        ->sum('total_insurance_amount');
+
+        $totalPendingInsurance = DB::table('tupad_employees')
+        ->where('beneficiary_status', 'PENDING')
+        ->sum('total_insurance_amount');
+
+        $totalApprovedInsurance = DB::table('tupad_employees')
+        ->where('beneficiary_status', 'APPROVED')
+        ->sum('total_insurance_amount');
+
+        $totalDeniedInsurance = DB::table('tupad_employees')
+        ->where('beneficiary_status', 'DENIED')
+        ->sum('total_insurance_amount');
+
+
+        //project and Beneficiary Condition
+        if($totalBudget == 0 && $totalInsurance == 0){
             $percentage = 0;
+            $percentage1 = 0;
             return view('home', compact(
+                //Beneficiary
+                'countingBeneficiaryTotals',
+                'totalPendingInsurance',
+                'totalApprovedInsurance',
+                'totalDeniedInsurance',
+                'percentage1',
+                //Project
                 'countingTupadTotals',
                 'totalPendingBudget',
                 'totalApprovedBudget',
@@ -66,9 +100,17 @@ class HomeController extends Controller
         }
 
         $percentage = ($totalApprovedBudget / $totalBudget) * 100;
+        $percentage1 = ($totalApprovedInsurance / $totalInsurance) * 100;
 
 
         return view('home', compact(
+            //Beneficiary
+            'countingBeneficiaryTotals',
+            'totalPendingInsurance',
+            'totalApprovedInsurance',
+            'totalDeniedInsurance',
+            'percentage1',
+            //Project
             'countingTupadTotals',
             'totalPendingBudget',
             'totalApprovedBudget',
