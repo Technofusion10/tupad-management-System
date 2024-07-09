@@ -17,4 +17,9 @@ class TupadEmployee extends Model
     {
         return $this->hasMany(TupadInformation::class);
     }
+
+    public function familyMember()
+    {
+        return $this->hasMany(FamilyMember::class);
+    }
 }

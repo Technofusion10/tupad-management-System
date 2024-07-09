@@ -138,7 +138,7 @@ class TupadController extends Controller
         $beneficiary = TupadEmployee::find($request->id);
 
         // Fetch beneficiary
-        // $tupadProject = TupadInformation::find($request->id);
+        $tupadProject = TupadInformation::find($request->id);
 
         // Fetch all tupad beneficiary with the same tupad id
         $tupadBeneficiaries = TupadEmployee::where('tupad_id', '=', $beneficiary->tupad_id)->paginate(15);
@@ -148,7 +148,7 @@ class TupadController extends Controller
         return view('admin.Tupad.view-beneficiary-information', [
             'beneficiary' => $beneficiary,
             'tupadBeneficiaries' => $tupadBeneficiaries,
-            // 'tupadProject' => $tupadProject
+            'tupadProject' => $tupadProject
         ]);
     }
 
