@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\TupadProjectController;
 use App\Http\Controllers\Admin\TupadController;
 use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\CheckIdentificationController;
-
 use App\Models\TupadInformation;
 use App\Models\TupadEmployee;
 use App\Models\User;
@@ -95,6 +94,10 @@ Route::middleware('auth')->group(function () {
     // Store Tupad Beneficiary Info
     Route::post('/dashboard/add-tupad-form/store', [TupadController::class, 'store'])
     ->name('admin.tupad.add.beneficiary');
+
+    // Store Tupad Beneficiary Info
+    Route::post('/dashboard/add-family-member-form/store', [TupadController::class, 'storeMember'])
+    ->name('admin.tupad.add.family.member');
 
     // Navigate to add tupad project info form
     Route::get('/dashboard/add-tupad-project-info-form', function () {

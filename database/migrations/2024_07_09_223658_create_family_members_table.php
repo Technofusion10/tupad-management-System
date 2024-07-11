@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('Family_mobile');
             $table->string('Family_Cstatus');
             $table->string('Family_address');
-            $table->string('street');
+            $table->string('Family_Relationship');
             $table->timestamps();
         });
     }

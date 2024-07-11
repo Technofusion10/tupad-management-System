@@ -14,7 +14,7 @@ use App\Exports\BeneficiariesExport;
 use App\Exports\TupadInformationExport;
 
 use App\Imports\BeneficiariesImport;
-
+use App\Models\FamilyMember;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -43,8 +43,7 @@ class TupadController extends Controller
     {
         // Fetch Project Information
         $checkReferenceProject= TupadInformation::where("project_reference", "=", $request->project_reference)->first();
-
-        //dd($checkReferenceProject);
+        // dd($checkReferenceProject);
 
         if($checkReferenceProject == NULL)
         {
@@ -60,6 +59,7 @@ class TupadController extends Controller
         {
             // Validate add tupad beneficiaries form
             $validator = Validator::make($request->all(), [
+                //beneficiary
                 'contact_number' => ['required', 'string', 'max:255'],
                 'email_address' => ['nullable', 'email'],
                 'first_name' => ['required', 'string', 'max:255'],
@@ -81,6 +81,7 @@ class TupadController extends Controller
                 'status' => ['nullable', 'string', 'max:255'],
                 'remarks' => ['nullable', 'string', 'max:255'],
                 'picture' => ['required','mimes:jpeg', 'max:20000'],
+
             ]);
 
             if ($validator->fails()) {
@@ -120,9 +121,79 @@ class TupadController extends Controller
                 'remarks' => $request->remarks,
             ]);
 
+
             $data = [
                 'message_type' => 'success',
                 'message' => 'Successfully added TUPAD Beneficiary. Thank you.',
+                'action' => 'redirect-back-submit-beneficiary'
+            ];
+
+            return view('admin.Tupad.message', $data);
+        }
+
+
+    }
+
+    public function storeMember(Request $request)
+    {
+        // Fetch Project Information
+        $checkEmployeeID= TupadEmployee::where("id", "=", $request->id)->first();
+        // dd($checkEmployeeID);
+
+        // dd($request);
+
+        if($checkEmployeeID == NULL)
+        {
+            $data = [
+                'message_type' => 'error',
+                'message' => 'Error. Benefeciary ID Number does not exist.',
+                'action' => 'redirect-back-submit-beneficiary'
+            ];
+
+            return view('admin.Tupad.message', $data);
+        }
+        else
+        {
+            // Validate add tupad beneficiaries form
+            $validator = Validator::make($request->all(), [
+                //beneficiary
+                'Family_Fname' => ['required', 'string', 'max:255'],
+                'Family_Mname' => ['required', 'string', 'max:255'],
+                'Family_Lname' => ['required', 'string', 'max:255'],
+                'Family_gender' => ['required', 'string', 'max:255'],
+                'Family_age' => ['required', 'string', 'max:255'],
+                'Family_birth' => ['required', 'date'],
+                'Family_mobile' => ['required', 'string', 'max:255'],
+                'Family_Cstatus' => ['required', 'string', 'max:255'],
+                'Family_address' => ['required', 'string', 'max:255'],
+                'Family_Relationship' => ['required', 'string', 'max:255'],
+
+
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            // If the validation passes, continue with your logic here
+
+            FamilyMember::Create([
+                'employee_id' => $checkEmployeeID->id,
+                'Family_Fname' => $request->Family_Fname,
+                'Family_Mname' => $request->Family_Mname,
+                'Family_Lname' => $request->Family_Lname,
+                'Family_gender' => $request->Family_gender,
+                'Family_age' => $request->Family_age,
+                'Family_birth' => $request->Family_birth,
+                'Family_mobile' => $request->Family_mobile,
+                'Family_Cstatus' => $request->Family_Cstatus,
+                'Family_address' => $request->Family_address,
+                'Family_Relationship' => $request->Family_Relationship,
+            ]);
+
+            $data = [
+                'message_type' => 'success',
+                'message' => 'Successfully added TUPAD Family Member. Thank you.',
                 'action' => 'redirect-back-submit-beneficiary'
             ];
 

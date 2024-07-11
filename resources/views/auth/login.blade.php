@@ -6,7 +6,7 @@
 <div class="row justify-content-center ">
 
     <div class="text-center mt-5">
-        <h1 class="text-white">e-DILP Monitoring System</h1>
+        <h1 class="text-white font-weight-bold">TUPAD Monitoring System</h1>
     </div>
 
     <div class="col-xl-10 col-lg-12 col-md-9 ">
@@ -23,12 +23,14 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-login-image">
-                        <img src="{{asset('images/dolee.png')}}" alt="img" style="height: 392px; width: 426px;">
+                        <img src="{{asset('images/dolee.png')}}" alt="img" style="height: 100%; width: 426px;">
                     </div>
                     <div class="col-lg-7">
                         <div class="pt-5 pl-5 pb-5 pr-4">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 font-weight-bold font-italic mb-4">Welcome Back!</h1>
+                            <div class="">
+                                <h1 class="h3 text-gray-900 font-weight-bold">Welcome Back!</h1>
+                                <h1 class="h6 text-gray-900 mb-4">Please enter you cridentials</h1>
+
                             </div>
 
                             @if (session('error'))

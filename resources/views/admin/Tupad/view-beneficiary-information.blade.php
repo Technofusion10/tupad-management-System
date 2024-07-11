@@ -40,7 +40,7 @@
                         <ul class="list-group">
 
                             <li class="list-group-item font-weight-bold">
-                                TUPAD EMPOYEE ID: {{ $beneficiary->id }}
+                                TUPAD BENEFICIARY ID: {{ $beneficiary->id }}
                             </li>
 
                             <li class="list-group-item font-weight-bold">
@@ -138,6 +138,52 @@
                             </li>
 
                         </ul>
+
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Family Member</h6>
+                            <a data-toggle="modal" data-target="#addFamilyMember" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fa-solid fa-user-plus"></i>
+                                ADD
+                            </a>
+                        </div>
+
+                        <!-- Row 5 -->
+                        <div class="row mb-3">
+                            <div class="col-lg-12 mb-1">
+                                <table class="table table-hover">
+                                    <thead class="border ">
+                                        <tr>
+                                            <th class="border-right">First Name</th>
+                                            <th class="border-right">Middle Name</th>
+                                            <th class="border-right">Last Name</th>
+                                            <th class="border-right">Gender</th>
+                                            <th class="border-right">Age</th>
+                                            <th class="border-right">Date of Birth</th>
+                                            <th class="border-right">Mobile No</th>
+                                            <th class="border-right">Civil Status</th>
+                                            <th class="border-right">Address</th>
+                                            <th class="border-right">Relationship</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border">
+                                        <tr>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                            <td class="border-right"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- End -->
 
                         @if(Auth::user()->role_id == 16 )
 
@@ -355,5 +401,214 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -- Add Family -->
+    <div class="modal fade" id="addFamilyMember" tabindex="-1" role="dialog" aria-labelledby="addFamilyMemberLabel" aria-hidden="true">
+        <div
+        class="modal-dialog"
+        style="
+            border: 5px solid #74f76d;
+            border-radius: 8px;
+            "
+        role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="m-0 font-weight-bold text-primary">TUPAD Program - Add Beneficiaries</h6>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+
+                <div class="modal-body">
+                    <form action="{{ route('admin.tupad.add.family.member') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1" hidden>
+
+                                <label for="">BENEFICIARY FULLNAME</label>
+                                <input name="id" type="text" value="{{ $beneficiary->id }}" class="form-control font-weight-bold" id="" placeholder="{{ $beneficiary->id }}" readonly>
+
+                                @error('id')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1">
+
+                                <label for="">BENEFICIARY FULLNAME</label>
+                                <input type="text" placeholder="{{ $beneficiary->first_name }} {{ $beneficiary->middle_initial }} {{ $beneficiary->last_name }}" class="form-control font-weight-bold" id="" readonly>
+
+                                @error('id')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 2 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">First Name</label>
+                                <input name="Family_Fname" type="text" value="{{ old('Family_Fname') }}" class="form-control" id="" placeholder="Enter First Name">
+
+                                @error('Family_Fname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Middle Initial</label>
+                                <input name="Family_Mname" type="text" value="{{ old('Family_Mname') }}" class="form-control" id="" placeholder="Enter Middle Initial">
+
+                                @error('Family_Mname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 3 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Last Name</label>
+                                <input name="Family_Lname" type="text" value="{{ old('Family_Lname') }}" class="form-control" id="" placeholder="Enter Last Name">
+
+                                @error('Family_Lname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Gender</label>
+                                <input name="Family_gender" type="text" value="{{ old('Family_gender') }}" class="form-control" id="" placeholder="Enter Gender">
+
+                                @error('Family_gender')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 4 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Date of Birth</label>
+                                <input name="Family_birth" type="date" value="{{ old('Family_birth') }}" class="form-control" id="" placeholder="Enter Date of Birth">
+
+                                @error('Family_birth')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Age</label>
+                                <input name="Family_age" type="text" value="{{ old('Family_age') }}" class="form-control" id="" placeholder="Enter Your Age">
+
+                                @error('Family_age')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 5 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Mobile No.</label>
+                                <input name="Family_mobile" type="text" value="{{ old('Family_mobile') }}" class="form-control" id="" placeholder="Enter Mobile No.">
+
+                                @error('Family_mobile')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Civil Status</label>
+                                <input name="Family_Cstatus" type="text" value="{{ old('Family_Cstatus') }}" class="form-control" id="" placeholder="Enter Civil Status">
+
+                                @error('Family_Cstatus')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-8 mb-1">
+
+                                <label for="">ADDRESS</label>
+                                <input name="Family_address" type="text" value="{{ old('Family_address') }}" class="form-control" id="" placeholder="Enter Address">
+
+                                @error('Family_address')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-4 mb-1">
+
+                                <label for="">Relationship</label>
+                                <input name="Family_Relationship" type="text" value="{{ old('Family_Relationship') }}" class="form-control" id="" placeholder="Enter Relationship">
+
+                                @error('Family_Relationship')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1 text-center">
+                                <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end of modal family member-->
 
 @endsection

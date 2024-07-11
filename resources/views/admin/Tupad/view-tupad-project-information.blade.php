@@ -725,7 +725,8 @@
                             <div class="col-lg-12 mb-1">
 
                                 <label for="">Project Reference Number</label>
-                                <input name="project_reference" type="text" value="{{ old('project_reference') }}" class="form-control font-weight-bold" id="" placeholder="{{ $tupadProject->project_reference }} " readonly>
+                                <input name="project_reference" type="text" value="{{ $tupadProject->project_reference }}" class="form-control font-weight-bold" id="" placeholder="{{ $tupadProject->project_reference }}" readonly>
+
 
                                 @error('project_reference')
                                     <p style="color: red;">{{ $message }}</p>
