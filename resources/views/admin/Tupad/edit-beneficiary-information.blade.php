@@ -130,7 +130,23 @@
                             <!-- Row 2 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-4 mb-1">
+                                <div class="col-lg-3 mb-1">
+                                    <label for="">Contact Number</label>
+                                    <input
+                                        name="contact_number"
+                                        type="text"
+                                        value="{{ $beneficiary->contact_number }}"
+                                        class="form-control"
+                                        id=""
+                                        placeholder="Enter Contact Number"
+                                    >
+
+                                    @error('contact_number')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Date of Birth</label>
                                     <input
                                         name="date_of_birth"
@@ -146,7 +162,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4 mb-1">
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Age</label>
                                     <input
                                         name="age"
@@ -161,7 +177,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-4 mb-1">
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Region</label>
                                     <input
                                         name="region"
@@ -169,6 +185,7 @@
                                         value="{{ $beneficiary->region }}"
                                         class="form-control"
                                         placeholder="Enter Region..."
+                                        readonly
                                     >
 
                                     @error('region')
@@ -268,6 +285,21 @@
                             <!-- Row 3 -->
                             <div class="row mb-3">
 
+                                <div class="col-lg-3 mb-1">
+                                    <label for="">Email Address</label>
+                                    <input
+                                        name="email_address"
+                                        type="text"
+                                        value="{{ $beneficiary->email_address }}"
+                                        class="form-control"
+                                        placeholder="Enter Email Address..."
+                                    >
+
+                                    @error('email_address')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
                                 <div class="col-lg-6 mb-1">
                                     <label for="">Designated Beneficiary</label>
                                     <input
@@ -283,7 +315,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-6 mb-1">
+                                <div class="col-lg-3 mb-1">
 
                                     <label for="">Relationship To Assured</label>
                                     <input
@@ -395,13 +427,30 @@
                             <!-- Row 6 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-12 mb-1">
+                                <div class="col-lg-6 mb-1">
+                                    <label for="">Status</label>
+                                    <textarea
+                                        name="status"
+                                        class="form-control"
+                                        value ="{{ $beneficiary->remarks }}"
+                                        id=""
+                                        placeholder="{{ $beneficiary->status }}"
+                                        rows="5"
+                                    >
+                                    </textarea>
+                                    @error('status')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-6 mb-1">
                                     <label for="">Remarks</label>
                                     <textarea
                                         name="remarks"
                                         class="form-control"
+                                        value ="{{ $beneficiary->remarks }}"
                                         id=""
-                                        placeholder="Enter Remarks"
+                                        placeholder="{{ $beneficiary->remarks }}"
                                         rows="5"
                                     >
                                     </textarea>
@@ -425,6 +474,26 @@
                                 >
                                 <label class="custom-file-label" for="customFile">Choose file</label>
 
+                            </div>
+                            <!-- End -->
+
+                            <!-- Row 3 -->
+                            <div class="row mb-3">
+
+                                <div class="col-lg-12 mb-1">
+                                    <label for="">Interviewed by</label>
+                                    <input
+                                        name="interviewed_by"
+                                        type="text"
+                                        value="{{ $beneficiary->interviewed_by }}"
+                                        class="form-control"
+                                        placeholder="Enter Interviewed by..."
+                                    >
+
+                                    @error('interviewed_by')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                             <!-- End -->
 

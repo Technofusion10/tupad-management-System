@@ -420,7 +420,7 @@
         <!-- -->
 
 
-        <!-- DataTales Example -->
+        <!-- DataTales Duplicated Beneficiaries Example -->
         <div class="card shadow mb-4">
 
             <div class="card-header py-3">
@@ -781,8 +781,8 @@
 
                             <div class="col-lg-6 mb-1">
 
-                                <label for="">Middle Initial</label>
-                                <input name="middle_initial" type="text" value="{{ old('middle_initial') }}" class="form-control" id="" placeholder="Enter Middle Initial">
+                                <label for="">Middle Name</label>
+                                <input name="middle_initial" type="text" value="{{ old('middle_initial') }}" class="form-control" id="" placeholder="Enter Middle Name">
 
                                 @error('middle_initial')
                                     <p style="color: red;">{{ $message }}</p>
@@ -1074,6 +1074,20 @@
                         <!-- End -->
 
                         <!-- Row 14 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1">
+                                <label for="">Interviewed by</label>
+                                    <input name="interviewed_by" type="text" value="{{ old('interviewed_by') }}" class="form-control" id="" placeholder="Enter Interviewed by">
+
+                                @error('interviewed_by')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 15 -->
                         <div class="row mb-3">
 
                             <div class="col-lg-12 mb-1 text-center">

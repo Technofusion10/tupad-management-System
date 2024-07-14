@@ -11,7 +11,9 @@ use App\Models\TupadEmployee;
 use App\Models\User;
 
 use App\Exports\BeneficiariesExport;
+use App\Exports\AllBeneficiariesExport;
 use App\Exports\TupadInformationExport;
+use App\Exports\TupadAllInformationExport;
 
 use App\Imports\BeneficiariesImport;
 use App\Models\FamilyMember;
@@ -81,6 +83,7 @@ class TupadController extends Controller
                 'status' => ['nullable', 'string', 'max:255'],
                 'remarks' => ['nullable', 'string', 'max:255'],
                 'picture' => ['required','mimes:jpeg', 'max:20000'],
+                'interviewed_by' => ['nullable', 'string', 'max:255'],
 
             ]);
 
@@ -119,6 +122,7 @@ class TupadController extends Controller
                 'file_path' => basename($path),
                 'status' => $request->status,
                 'remarks' => $request->remarks,
+                'interviewed_by' => $request->interviewed_by,
             ]);
 
 
@@ -206,20 +210,59 @@ class TupadController extends Controller
     public function show(Request $request)
     {
         // Fetch beneficiary
-        $beneficiary = TupadEmployee::find($request->id);
+        // $beneficiary = TupadEmployee::find($request->id);
+
+        // //Fetch Family Member
+        // $familyMember = FamilyMember::find($request->id);
+
+        // // Fetch beneficiary
+        // $tupadProject = TupadInformation::find($request->id);
+
+        // // Fetch all tupad beneficiary with the same tupad id
+        // $tupadBeneficiaries = TupadEmployee::where('tupad_id', '=', $beneficiary->tupad_id)->paginate(15);
+        // //dd($tupadBeneficiaries);
+
+        // //fectch all family member with family id
+        // $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->employee_id)->paginate(10);
+        // // dd($beneficiaryFamily);
+
+        // // Navigate to
+        // return view('admin.Tupad.view-beneficiary-information', [
+        //     'beneficiary' => $beneficiary,
+        //     'tupadBeneficiaries' => $tupadBeneficiaries,
+        //     'tupadProject' => $tupadProject,
+        //     'familyMember' => $familyMember,
+        //     'beneficiaryFamily' => $beneficiaryFamily
+        // ]);
 
         // Fetch beneficiary
+        $beneficiary = TupadEmployee::find($request->id);
+
+        // Fetch Family Member if beneficiary found
+        $familyMember = null;
+        if ($beneficiary) {
+            $familyMember = FamilyMember::find($request->id);
+        }
+
+        // Fetch Tupad Project
         $tupadProject = TupadInformation::find($request->id);
 
-        // Fetch all tupad beneficiary with the same tupad id
+        // Fetch all tupad beneficiaries with the same tupad id
         $tupadBeneficiaries = TupadEmployee::where('tupad_id', '=', $beneficiary->tupad_id)->paginate(15);
-        //dd($tupadBeneficiaries);
 
-        // Navigate to
+        // Fetch all family members with the same employee_id
+        $beneficiaryFamily = [];
+        if ($familyMember) {
+            $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->employee_id)->paginate(10);
+        }
+
+        // Return view with data
         return view('admin.Tupad.view-beneficiary-information', [
             'beneficiary' => $beneficiary,
             'tupadBeneficiaries' => $tupadBeneficiaries,
-            'tupadProject' => $tupadProject
+            'tupadProject' => $tupadProject,
+            'familyMember' => $familyMember,
+            'beneficiaryFamily' => $beneficiaryFamily
         ]);
     }
 
@@ -327,6 +370,7 @@ class TupadController extends Controller
             'beneficiary_status' => 'PENDING', //$request->beneficiary_status,
             'status' => $request->status,
             'remarks' => $request->remarks,
+            'interviewed_by' => $request->interviewed_by,
         ]);
 
         $data = [
@@ -356,9 +400,26 @@ class TupadController extends Controller
         //return Excel::download(new TupadBeneficiariesExport, 'TupadBeneficiaries.xlsx');
     }
 
+    public function exportAllBeneficiaries(Request $request)
+    {
+        return Excel::download(new AllBeneficiariesExport($request), 'AllTupadBeneficiaries.xlsx');
+        //return Excel::download(new TupadBeneficiariesExport, 'TupadBeneficiaries.xlsx');
+    }
+
+    public function export_AllTupadBeneficiaries(Request $request)
+    {
+        return Excel::download(new AllBeneficiariesExport($request), 'AllTupadBeneficiaries.xlsx');
+        //return Excel::download(new TupadBeneficiariesExport, 'TupadBeneficiaries.xlsx');
+    }
+
     public function exportTupadInformation(Request $request)
     {
         return Excel::download(new TupadInformationExport($request), 'TupadInformation.xlsx');
+    }
+
+    public function exportAllTupadInformation(Request $request)
+    {
+        return Excel::download(new TupadAllInformationExport($request), 'TupadAllInformation.xlsx');
     }
 
     public function importBeneficiaries(Request $request)

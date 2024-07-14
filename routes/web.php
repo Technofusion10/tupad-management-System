@@ -189,9 +189,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/export_tupad_beneficiaries/{id}', [TupadController::class, 'exportBeneficiaries'])
     ->name('export_TupadBeneficiaries');
 
+    //Export All Beneficiary
+    Route::get('/export_tupad_beneficiaries/', [TupadController::class, 'exportAllBeneficiaries'])
+    ->name('export_AllTupadBeneficiaries');
+
     // Export Tupad Information
     Route::get('/export_tupad_information/{id}', [TupadController::class, 'exportTupadInformation'])
     ->name('export_TupadInformation');
+
+    //Export all Project
+    Route::get('/exportAllTupadInformation/', [TupadController::class, 'exportAllTupadInformation'])
+    ->name('export_AllTupadInformation');
 
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 

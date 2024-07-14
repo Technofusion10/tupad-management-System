@@ -14,7 +14,7 @@
                 <i class="fa-solid fa-user-plus fa-sm mr- text-white-50"></i>
                 Add New Project
             </a>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a href="{{route('export_AllTupadInformation')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>
                 Generate Report
             </a>

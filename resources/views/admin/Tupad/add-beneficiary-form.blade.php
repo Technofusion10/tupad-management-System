@@ -115,7 +115,7 @@
 
                                 <div class="col-lg-3 mb-1">
 
-                                    <label for="">Middle Initial</label>
+                                    <label for="">Middle Name</label>
                                     <input name="middle_initial" type="text" value="{{ old('middle_initial') }}" class="form-control" id="" placeholder="Enter Middle Initial">
 
                                     @error('middle_initial')
@@ -388,20 +388,36 @@
                             <!-- Row 13 -->
                             <div class="row mb-3">
 
-                                <label for="">Upload Valid ID</label>
+                                <div class="col-lg-12 mb-1">
+                                    <label for="">Upload Valid ID</label>
 
-                                <div class="col-lg-12 mb-1 text-center">
-                                    <input type="file" name="picture" accept="jpeg" class="form-control">
+                                    <div class="col-lg-12 mb-1 text-center">
+                                        <input type="file" name="picture" accept="jpeg" class="form-control">
+                                    </div>
+
+                                    @error('picture')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
                                 </div>
-
-                                @error('picture')
-                                    <p style="color: red;">{{ $message }}</p>
-                                @enderror
 
                             </div>
                             <!-- End -->
 
                             <!-- Row 14 -->
+                            <div class="row mb-3">
+
+                                <div class="col-lg-12 mb-1">
+                                    <label for="">Interviewed by</label>
+                                        <input name="interviewed_by" type="text" value="{{ old('interviewed_by') }}" class="form-control" id="" placeholder="Enter Interviewed by">
+
+                                    @error('interviewed_by')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <!-- End -->
+
+                            <!-- Row 15 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1 text-center">

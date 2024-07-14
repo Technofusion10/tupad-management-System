@@ -57,6 +57,7 @@ return new class extends Migration
 
             $table->string('status')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('interviewed_by')->nullable();
 
             $table->timestamps();
         });

@@ -71,7 +71,7 @@
                                 <div class="col-lg-6 mb-1">
 
                                     <label for="">Office Name</label>
-                                    <input name="name_of_office" type="text" value="{{ old('name_of_office') }}" placeholder="Enter Office Name" class="form-control">
+                                    <input name="name_of_office" type="text" value="{{ old('name_of_office') }}" placeholder="Enter Office Name" class="form-control" >
 
                                     @error('name_of_office')
                                         <p style="color: red;">{{ $message }}</p>
@@ -88,7 +88,7 @@
                                 <div class="col-lg-6 mb-1">
 
                                     <label for="">Office Address</label>
-                                    <input name="office_address" type="text" value="{{ old('office_address') }}" placeholder="Enter Office Address" class="form-control">
+                                    <input name="office_address" type="text" value="{{ old('office_address') }}" placeholder="Enter Office Address" class="form-control" >
 
                                     @error('office_address')
                                         <p style="color: red;">{{ $message }}</p>
@@ -143,7 +143,7 @@
 
                                 <div class="col-lg-6 mb-1">
 
-                                    <label for="">Province</label>
+                                    <label for="">Provincial-Field Office</label>
                                     <select name="province" class="form-control" id="">
                                         <option value="" selected>Select Province</option>
                                         <option value="Cagayan de Oro City">Cagayan de Oro City</option>

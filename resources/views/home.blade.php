@@ -210,7 +210,7 @@
 
                             <div class="progress mb-4">
 
-                                <div class="progress-bar" role="progressbar" style="width: {{ number_format($percentage, 0) }}%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped font-weight-bold" role="progressbar" style="width: {{ number_format($percentage, 0) }}%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 
                                 </div>
 
@@ -448,8 +448,7 @@
 
                         <div class="progress mb-4">
 
-                            <div class="progress-bar" role="progressbar" style="width: {{ number_format($percentage, 0) }}%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-
+                            <div class="progress-bar progress-bar-striped font-weight-bold" role="progressbar" style="width: {{ number_format($percentage, 0) }}%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                             </div>
 
                         </div>

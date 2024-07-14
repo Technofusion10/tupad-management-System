@@ -13,7 +13,7 @@
                 <i class="fa-regular fa-address-book text-white-50 mr-1"></i>
                 Add Beneficiaries
             </a>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a href="{{route('export_AllTupadBeneficiaries')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>
                 Generate Report
             </a>

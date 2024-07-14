@@ -100,6 +100,11 @@
                             </li>
 
                             <li class="list-group-item font-weight-bold">
+                                INTERVIEWED BY:
+                                {{ $beneficiary->interviewed_by }}
+                            </li>
+
+                            <li class="list-group-item font-weight-bold">
 
                                 BENEFICIARY STATUS:
                                 @if($beneficiary->beneficiary_status == "PENDING")
@@ -145,45 +150,85 @@
                                 <i class="fa-solid fa-user-plus"></i>
                                 ADD
                             </a>
+                            {{-- {{ '/dashboard/tupad-beneficiary-table-information/'.$familyMember->employee_id }} --}}
+                            <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="" data-toggle="collapse" data-target="#familyMem"
+                                aria-expanded="true" aria-controls="tupad">
+                                <i class="fa fa-users"></i>
+                                <span>View</span>
+                            </a>
                         </div>
 
-                        <!-- Row 5 -->
-                        <div class="row mb-3">
-                            <div class="col-lg-12 mb-1">
-                                <table class="table table-hover">
-                                    <thead class="border ">
-                                        <tr>
-                                            <th class="border-right">First Name</th>
-                                            <th class="border-right">Middle Name</th>
-                                            <th class="border-right">Last Name</th>
-                                            <th class="border-right">Gender</th>
-                                            <th class="border-right">Age</th>
-                                            <th class="border-right">Date of Birth</th>
-                                            <th class="border-right">Mobile No</th>
-                                            <th class="border-right">Civil Status</th>
-                                            <th class="border-right">Address</th>
-                                            <th class="border-right">Relationship</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="border">
-                                        <tr>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                            <td class="border-right"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                        <div id="familyMem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!-- Row 5 -->
+                                <div class="row mb-3">
+                                    <div class="col-lg-12 mb-1">
+                                        <table class="table table-hover text-center">
+                                            <thead class="border bg-gray-500 text-dark">
+                                                <tr>
+                                                    <th class="border border-dark">ID</th>
+                                                    <th class="border border-dark">First Name</th>
+                                                    <th class="border border-dark">Middle Name</th>
+                                                    <th class="border border-dark">Last Name</th>
+                                                    <th class="border border-dark">Gender</th>
+                                                    <th class="border border-dark">Age</th>
+                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
+                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
+                                                    <th class="border border-dark">Civil Status</th>
+                                                    {{-- <th class="border border-dark">Address</th> --}}
+                                                    <th class="border border-dark">Relationship</th>
+                                                    <th class="border border-dark">Action</th>
+                                                 </tr>
+                                            </thead>
+                                            <tfoot class="border bg-gray-500 text-dark">
+                                                <tr>
+                                                    <th class="border border-dark">ID</th>
+                                                    <th class="border border-dark">First Name</th>
+                                                    <th class="border border-dark">Middle Name</th>
+                                                    <th class="border border-dark">Last Name</th>
+                                                    <th class="border border-dark">Gender</th>
+                                                    <th class="border border-dark">Age</th>
+                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
+                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
+                                                    <th class="border border-dark">Civil Status</th>
+                                                    {{-- <th class="border border-dark">Address</th> --}}
+                                                    <th class="border border-dark">Relationship</th>
+                                                    <th class="border border-dark">Action</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody class="border bg-gray-200">
+                                                {{-- @if ($beneficiary->id == 1 && $familyMember->id == 1) --}}
+                                                    @foreach ($beneficiaryFamily as $familyMember)
+                                                        <tr>
+                                                            <td class="border border-dark">
+                                                            {{$familyMember->employee_id}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_Fname}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_Mname}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_Lname}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_gender}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_age}}</td>
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_birth}}</td> --}}
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_mobile}}</td> --}}
+                                                            <td class="border border-dark">{{$familyMember->Family_Cstatus}}</td>
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_address}}</td> --}}
+                                                            <td class="border border-dark">{{$familyMember->Family_Relationship}}</td>
+                                                            <td class="border border-dark">
+                                                                <a href="#" class="btn btn-secondary">view</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                {{-- @endif --}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- End -->
                             </div>
                         </div>
 
-                        <!-- End -->
+
+
 
                         @if(Auth::user()->role_id == 16 )
 
@@ -479,8 +524,8 @@
 
                             <div class="col-lg-6 mb-1">
 
-                                <label for="">Middle Initial</label>
-                                <input name="Family_Mname" type="text" value="{{ old('Family_Mname') }}" class="form-control" id="" placeholder="Enter Middle Initial">
+                                <label for="">Middle Name</label>
+                                <input name="Family_Mname" type="text" value="{{ old('Family_Mname') }}" class="form-control" id="" placeholder="Enter Middle Name">
 
                                 @error('Family_Mname')
                                     <p style="color: red;">{{ $message }}</p>
