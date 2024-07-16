@@ -13,10 +13,12 @@
                 <i class="fa-regular fa-address-book text-white-50 mr-1"></i>
                 Add Beneficiaries
             </a>
-            <a href="{{route('export_AllTupadBeneficiaries')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            @if (Auth::user()->role_id == 16)
+                <a href="{{route('export_AllTupadBeneficiaries')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>
-                Generate Report
+                Generate Beneficiaries Report
             </a>
+            @endif
         </div>
 
         <div class="row">
@@ -130,8 +132,8 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/'.$beneficiary->id }}" class="btn btn-primary">VIEW</a>
-                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/edit/'.$beneficiary->id }}" class="btn btn-primary">EDIT</a>
+                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/'.$beneficiary->id }}" class="btn btn-primary"><small>VIEW</small></a>
+                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/edit/'.$beneficiary->id }}" class="btn btn-primary"><small>EDIT</small></a>
                                     </td>
                                 </tr>
 

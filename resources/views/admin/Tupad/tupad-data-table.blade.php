@@ -14,10 +14,12 @@
                 <i class="fa-solid fa-user-plus fa-sm mr- text-white-50"></i>
                 Add New Project
             </a>
+            @if (Auth::user()->role_id == 16)
             <a href="{{route('export_AllTupadInformation')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>
-                Generate Report
+                Generate Project Report
             </a>
+            @endif
         </div>
 
         <div class="row">
@@ -125,8 +127,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ '/dashboard/tupad-project-table/'.$project->id }}" class="btn btn-primary">VIEW</a>
-                                        <a href="{{ '/dashboard/tupad-project-table/edit/'.$project->id }}" class="btn btn-primary">EDIT</a>
+                                        <a href="{{ '/dashboard/tupad-project-table/'.$project->id }}" class="btn btn-primary"><small>VIEW</small></a>
+                                        <a href="{{ '/dashboard/tupad-project-table/edit/'.$project->id }}" class="btn btn-primary"><small>EDIT</small></a>
                                     </td>
                                 </tr>
                             @endforeach

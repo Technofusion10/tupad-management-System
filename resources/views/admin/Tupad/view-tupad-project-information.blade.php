@@ -698,7 +698,7 @@
         <div
         class="modal-dialog"
         style="
-            border: 5px solid #74f76d;
+            border: 5px solid #6c6c6c;
             border-radius: 8px;
             "
         role="document">
@@ -1089,8 +1089,12 @@
 
                         <!-- Row 15 -->
                         <div class="row mb-3">
-
-                            <div class="col-lg-12 mb-1 text-center">
+                            <div class="col-lg-2 mb-1 text-center">
+                                <button type="button" class="btn block btn-secondary btn-lg " data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                            <div class="col-lg-6 mb-1 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Add Beneficiary</button>
                             </div>
 

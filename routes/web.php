@@ -160,9 +160,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/tupad-beneficiary-table-information/edit/{id}', [TupadController::class, 'edit'])
     ->name('admin.tupad.edit.beneficiary');
 
+    // Edit Tupad Beneficiaries Details
+    Route::get('/dashboard/tupad-beneficiary-family-information/edit/{id}', [TupadController::class, 'editFamilyMember'])
+    ->name('admin.tupad.edit.beneficiary.family');
+
     // Update Tupad Beneficiary Information
     Route::post('/dashboard/tupad-beneficiary-table-information/edit/update', [TupadController::class, 'update'])
     ->name('admin.tupad.update.beneficiary');
+
+    // Update Tupad Beneficiary Information
+    Route::post('/dashboard/tupad-beneficiary-family-information/edit/update', [TupadController::class, 'updateFamilyMember'])
+    ->name('admin.tupad.update.beneficiary.family');
 
     // Search Data-Table Tupad Beneficiaries Information
     Route::get('/dashboard/tupad-beneficiaries-table-search', [TupadController::class, 'search'])

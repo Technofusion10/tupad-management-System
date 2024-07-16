@@ -144,15 +144,15 @@
 
                         </ul>
 
+
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Family Member</h6>
                             <a data-toggle="modal" data-target="#addFamilyMember" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fa-solid fa-user-plus"></i>
                                 ADD
                             </a>
-                            {{-- {{ '/dashboard/tupad-beneficiary-table-information/'.$familyMember->employee_id }} --}}
-                            <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="" data-toggle="collapse" data-target="#familyMem"
-                                aria-expanded="true" aria-controls="tupad">
+                            <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{'/dashboard/tupad-beneficiary-table-information/'.$beneficiary->id}}" data-toggle="collapse" data-target="#familyMem"
+                                aria-expanded="true" aria-controls="familyMem">
                                 <i class="fa fa-users"></i>
                                 <span>View</span>
                             </a>
@@ -173,10 +173,10 @@
                                                     <th class="border border-dark">Last Name</th>
                                                     <th class="border border-dark">Gender</th>
                                                     <th class="border border-dark">Age</th>
-                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
-                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
+                                                    <th class="border border-dark">Date of Birth</th>
+                                                    <th class="border border-dark">Mobile No</th>
                                                     <th class="border border-dark">Civil Status</th>
-                                                    {{-- <th class="border border-dark">Address</th> --}}
+                                                    <th class="border border-dark">Address</th>
                                                     <th class="border border-dark">Relationship</th>
                                                     <th class="border border-dark">Action</th>
                                                  </tr>
@@ -189,16 +189,15 @@
                                                     <th class="border border-dark">Last Name</th>
                                                     <th class="border border-dark">Gender</th>
                                                     <th class="border border-dark">Age</th>
-                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
-                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
+                                                    <th class="border border-dark">Date of Birth</th>
+                                                    <th class="border border-dark">Mobile No</th>
                                                     <th class="border border-dark">Civil Status</th>
-                                                    {{-- <th class="border border-dark">Address</th> --}}
+                                                    <th class="border border-dark">Address</th>
                                                     <th class="border border-dark">Relationship</th>
                                                     <th class="border border-dark">Action</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody class="border bg-gray-200">
-                                                {{-- @if ($beneficiary->id == 1 && $familyMember->id == 1) --}}
                                                     @foreach ($beneficiaryFamily as $familyMember)
                                                         <tr>
                                                             <td class="border border-dark">
@@ -208,26 +207,28 @@
                                                             <td class="border border-dark">{{$familyMember->Family_Lname}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_gender}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_age}}</td>
-                                                            {{-- <td class="border border-dark">{{$familyMember->Family_birth}}</td> --}}
-                                                            {{-- <td class="border border-dark">{{$familyMember->Family_mobile}}</td> --}}
+                                                            <td class="border border-dark">{{$familyMember->Family_birth}}</td>
+                                                            <td class="border border-dark">{{$familyMember->Family_mobile}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_Cstatus}}</td>
-                                                            {{-- <td class="border border-dark">{{$familyMember->Family_address}}</td> --}}
+                                                            <td class="border border-dark">{{$familyMember->Family_address}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_Relationship}}</td>
                                                             <td class="border border-dark">
-                                                                <a href="#" class="btn btn-secondary">view</a>
+                                                                <a href="{{'/dashboard/tupad-beneficiary-family-information/edit/'.$familyMember->id}}" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">edit</a>
+
+                                                                {{--<a href="{{'/dashboard/tupad-beneficiary-family-information/edit/'.$familyMember->id}}" data-toggle="modal" data-target="#familyInfo" aria-expanded="true" aria-controls="familyInfo" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">view</a> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
-                                                {{-- @endif --}}
                                             </tbody>
                                         </table>
+                                        <div>
+                                            {{-- {{ $beneficiaryFamily->links() }} --}}
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- End -->
                             </div>
                         </div>
-
-
 
 
                         @if(Auth::user()->role_id == 16 )
@@ -323,8 +324,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/'.$beneficiaries->id }}" class="btn btn-primary">VIEW</a>
-                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/edit/'.$beneficiaries->id }}" class="btn btn-primary">EDIT</a>
+                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/'.$beneficiaries->id }}" class="btn btn-primary"><small>VIEW</small></a>
+                                        <a href="{{ '/dashboard/tupad-beneficiary-table-information/edit/'.$beneficiaries->id }}" class="btn btn-primary"><small>EDIT</small></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -453,7 +454,7 @@
         <div
         class="modal-dialog"
         style="
-            border: 5px solid #74f76d;
+            border: 5px solid #6c6c6c;
             border-radius: 8px;
             "
         role="document">
@@ -655,5 +656,213 @@
         </div>
     </div>
     <!--end of modal family member-->
+
+    <!--Family Information-->
+    {{-- <div class="modal fade" id="familyInfo" tabindex="-1" role="dialog" aria-labelledby="familyInfoLabel" aria-hidden="true">
+        <div
+            class="modal-dialog"
+            style="
+                border: 5px solid #6c6c6c;
+                border-radius: 8px;
+                "
+            role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="m-0 font-weight-bold text-primary">TUPAD Program - Add Beneficiaries</h6>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+
+                <div class="modal-body">
+                    <form action="{{ route('admin.tupad.update.beneficiary.family') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1" hidden>
+
+                                <label for="">BENEFICIARY FULLNAME</label>
+                                <input name="id" type="text" value="{{ $beneficiary->id }}" class="form-control font-weight-bold" id="" placeholder="{{ $beneficiary->id }}" readonly>
+
+                                @error('id')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1">
+
+                                <label for="">BENEFICIARY FULLNAME</label>
+                                <input type="text" placeholder="{{ $beneficiary->first_name }} {{ $beneficiary->middle_initial }} {{ $beneficiary->last_name }}" class="form-control font-weight-bold" id="" readonly>
+
+                                @error('id')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 2 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">First Name</label>
+                                <input name="Family_Fname" type="text" value="{{$familyMember->Family_Fname}}" class="form-control" id="" placeholder="Enter First Name">
+
+                                @error('Family_Fname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Middle Name</label>
+                                <input name="Family_Mname" type="text" value="{{ old('Family_Mname') }}" class="form-control" id="" placeholder="Enter Middle Name">
+
+                                @error('Family_Mname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 3 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Last Name</label>
+                                <input name="Family_Lname" type="text" value="{{ old('Family_Lname') }}" class="form-control" id="" placeholder="Enter Last Name">
+
+                                @error('Family_Lname')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Gender</label>
+                                <input name="Family_gender" type="text" value="{{ old('Family_gender') }}" class="form-control" id="" placeholder="Enter Gender">
+
+                                @error('Family_gender')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 4 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Date of Birth</label>
+                                <input name="Family_birth" type="date" value="{{ old('Family_birth') }}" class="form-control" id="" placeholder="Enter Date of Birth">
+
+                                @error('Family_birth')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Age</label>
+                                <input name="Family_age" type="text" value="{{ old('Family_age') }}" class="form-control" id="" placeholder="Enter Your Age">
+
+                                @error('Family_age')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 5 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Mobile No.</label>
+                                <input name="Family_mobile" type="text" value="{{ old('Family_mobile') }}" class="form-control" id="" placeholder="Enter Mobile No.">
+
+                                @error('Family_mobile')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+
+                                <label for="">Civil Status</label>
+                                <input name="Family_Cstatus" type="text" value="{{ old('Family_Cstatus') }}" class="form-control" id="" placeholder="Enter Civil Status">
+
+                                @error('Family_Cstatus')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-8 mb-1">
+
+                                <label for="">ADDRESS</label>
+                                <input name="Family_address" type="text" value="{{ old('Family_address') }}" class="form-control" id="" placeholder="Enter Address">
+
+                                @error('Family_address')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-4 mb-1">
+
+                                <label for="">Relationship</label>
+                                <input name="Family_Relationship" type="text" value="{{ old('Family_Relationship') }}" class="form-control" id="" placeholder="Enter Relationship">
+
+                                @error('Family_Relationship')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1 text-center">
+                                <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 
 @endsection

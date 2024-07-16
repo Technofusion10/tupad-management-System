@@ -212,8 +212,10 @@ class TupadController extends Controller
         // Fetch beneficiary
         // $beneficiary = TupadEmployee::find($request->id);
 
+
         // //Fetch Family Member
         // $familyMember = FamilyMember::find($request->id);
+        // // dd($familyMember);
 
         // // Fetch beneficiary
         // $tupadProject = TupadInformation::find($request->id);
@@ -223,7 +225,7 @@ class TupadController extends Controller
         // //dd($tupadBeneficiaries);
 
         // //fectch all family member with family id
-        // $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->employee_id)->paginate(10);
+        // $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->id)->paginate(3);
         // // dd($beneficiaryFamily);
 
         // // Navigate to
@@ -235,7 +237,7 @@ class TupadController extends Controller
         //     'beneficiaryFamily' => $beneficiaryFamily
         // ]);
 
-        // Fetch beneficiary
+        //Fetch beneficiary
         $beneficiary = TupadEmployee::find($request->id);
 
         // Fetch Family Member if beneficiary found
@@ -253,7 +255,7 @@ class TupadController extends Controller
         // Fetch all family members with the same employee_id
         $beneficiaryFamily = [];
         if ($familyMember) {
-            $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->employee_id)->paginate(10);
+            $beneficiaryFamily = FamilyMember::where('employee_id', '=', $familyMember->id)->paginate(10);
         }
 
         // Return view with data
@@ -312,10 +314,31 @@ class TupadController extends Controller
     {
         // Fetch beneficiary
         $beneficiary = TupadEmployee::find($request->id);
+        // dd($beneficiary);
 
         // Navigate to
         return view('admin.Tupad.edit-beneficiary-information', compact('beneficiary'));
     }
+
+    public function editFamilyMember(Request $request)
+    {
+        // Fetch beneficiary
+        $familyMember = FamilyMember::find($request->id);
+        // dd($familyMember);
+
+        // $beneficiary = TupadEmployee::find($request->id);
+        // dd($beneficiary);
+
+        // if($beneficiary == $beneficiary->id && $familyMember == $familyMember->employee_id){
+        //     // Navigate to
+        //     return view('admin.Tupad.view-family-member-information', compact('familyMember','beneficiary'));
+        // }
+        return view('admin.Tupad.view-family-member-information', compact('familyMember'));
+
+
+    }
+
+
 
     public function update(Request $request)
     {
@@ -381,8 +404,65 @@ class TupadController extends Controller
 
         return view('admin.Tupad.message', $data);
 
+    }
+
+    public function updateFamilyMember(Request $request)
+    {
+        // Validate add tupad beneficiaries form
+        // $validator = Validator::make($request->all(), [
+        //     'Family_Fname' => ['required', 'string', 'max:255'],
+        //     'Family_Mname' => ['required', 'string', 'max:255'],
+        //     'Family_Lname' => ['required', 'string', 'max:255'],
+        //     'Family_gender' => ['required', 'string', 'max:255'],
+        //     'Family_age' => ['required', 'string', 'max:255'],
+        //     'Family_birth' => ['required', 'date'],
+        //     'Family_mobile' => ['required', 'string', 'max:255'],
+        //     'Family_Cstatus' => ['required', 'string', 'max:255'],
+        //     'Family_address' => ['required', 'string', 'max:255'],
+        //     'Family_Relationship' => ['required', 'string', 'max:255'],
+
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+
+        $updateFamily = DB::table('family_members')
+        ->where('id', $request->id)
+        ->update([
+            'Family_Fname' => $request->Family_Fname ,
+            'Family_Mname' => $request->Family_Mname ,
+            'Family_Lname' => $request->Family_Lname ,
+            'Family_gender' => $request->Family_gender ,
+            'Family_age' => $request->Family_age ,
+            'Family_birth' => $request->Family_birth ,
+            'Family_mobile' => $request->Family_mobile ,
+            'Family_Cstatus' => $request->Family_Cstatus ,
+            'Family_address' => $request->Family_address ,
+            'Family_Relationship' => $request->Family_Relationship ,
+        ]);
+        // dd($updateFamily);
+
+        if($updateFamily){
+            $data = [
+                'message_type' => 'success',
+                'message' => 'Successfully Updated Family Information Details. Thank you.',
+                'action' => ''
+            ];
+        }else{
+            $data = [
+                'message_type' => 'error!',
+                'message' => 'Unsuccessfully Updated Family Information Details. Sorry!.',
+                'action' => ''
+            ];
+        }
+
+
+        return view('admin.Tupad.message', $data);
 
     }
+
+
 
     public function destroy()
     {
