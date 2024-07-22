@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('email_address')->nullable();
             $table->string('date_of_birth');
             $table->string('age');
+            $table->string('gender');
+            $table->string('civil_status');
             $table->string('region');
             $table->string('province');
             $table->string('barangay');

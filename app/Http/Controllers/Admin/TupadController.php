@@ -42,113 +42,122 @@ class TupadController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    // Fetch Project Information
+    $checkReferenceProject = TupadInformation::where("project_reference", $request->project_reference)->first();
 
-        // Fetch Project Information
-        $checkReferenceProject= TupadInformation::where("project_reference", "=", $request->project_reference)->first();
-        // dd($checkReferenceProject);
+    if ($checkReferenceProject == NULL) {
+        $data = [
+            'message_type' => 'error',
+            'message' => 'Error. Reference Number does not exist.',
+            'action' => 'redirect-back-submit-beneficiary'
+        ];
 
-        if($checkReferenceProject == NULL)
-        {
+        return view('admin.Tupad.message', $data);
+    } else {
+        // Check if beneficiary already exists in family members
+        $existingFamilyMember = FamilyMember::where('Family_Fname', $request->first_name)
+            ->where('Family_Mname', $request->middle_initial)
+            ->where('Family_Lname', $request->last_name)
+            ->first();
+
+        if ($existingFamilyMember) {
             $data = [
                 'message_type' => 'error',
-                'message' => 'Error. Reference Number does not exist.',
-                'action' => 'redirect-back-submit-beneficiary'
-            ];
-
-            return view('admin.Tupad.message', $data);
-        }
-        else if (!$checkReferenceProject == NULL)
-        {
-            // Validate add tupad beneficiaries form
-            $validator = Validator::make($request->all(), [
-                //beneficiary
-                'contact_number' => ['required', 'string', 'max:255'],
-                'email_address' => ['nullable', 'email'],
-                'first_name' => ['required', 'string', 'max:255'],
-                'middle_initial' => ['required', 'string', 'max:255'],
-                'last_name' => ['required', 'string', 'max:255'],
-                'name_extension' => ['nullable', 'string', 'max:255'],
-                'date_of_birth' => ['required', 'date'],
-                'age' => ['required', 'numeric'],
-                'region' => ['required', 'string', 'max:255'],
-                'province' => ['required', 'in:Cagayan de Oro City,Misamis Oriental,Misamis Occidental,Bukidnon,Lanao Del Norte,Camiguin'],
-                // 'complete_address' => ['required', 'string', 'max:255'],
-                'barangay' => ['required', 'string', 'max:255'],
-                'street' => ['required', 'string', 'max:255'],
-                'designated_beneficiary' => ['nullable', 'string', 'max:255'],
-                'relationship_to_assured' => ['nullable', 'string', 'max:255'],
-                'period_of_employment_start' => ['required', 'date'],
-                'period_of_employment_end' => ['required', 'date'],
-                'total_insurance_amount' => ['required', 'numeric'],
-                'status' => ['nullable', 'string', 'max:255'],
-                'remarks' => ['nullable', 'string', 'max:255'],
-                'picture' => ['nullable','mimes:jpeg', 'max:20000'],
-                'capturedImageData' => ['nullable','mimes:jpeg', 'max:20000'],
-                'interviewed_by' => ['nullable', 'string', 'max:255'],
-
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $picture = $request->file('picture');
-            $capturedImageData = $request->file('captured_image_data');
-
-            if ($picture && $picture->isValid()) {
-                $path = $picture->store('tupadBeneficiariesPicture');
-            } elseif ($capturedImageData && $capturedImageData->isValid()) {
-                $path = $capturedImageData->store('tupadBeneficiariesPicture');
-            } else {
-                // Handle case where neither $picture nor $captured_image_data is uploaded or valid
-                // You may want to add appropriate error handling or fallback logic here
-                $path = ''; // or some default path
-            }
-
-            // If the validation passes, continue with your logic here
-            $Query = TupadEmployee::Create([
-                'tupad_id' => $checkReferenceProject->id,
-                'first_name' => $request->first_name,
-                'middle_initial' => $request->middle_initial,
-                'last_name' => $request->last_name,
-                'name_extension' => $request->name_extension,
-                'contact_number' => $request->contact_number,
-                'email_address' => $request->email_address,
-                'date_of_birth' => $request->date_of_birth,
-                'age' => $request->age,
-                'region' => 'REGION 10 ONLY',
-                'province' => $request->province,
-                'barangay' => $request->barangay,
-                'street' => $request->street,
-                'postal_code' => $request->postal_code,
-                'designated_beneficiary' => $request->designated_beneficiary,
-                'relationship_to_assured' => $request->relationship_to_assured,
-                'period_of_employment_start' => $request->period_of_employment_start,
-                'period_of_employment_end' => $request->period_of_employment_end,
-                'total_insurance_amount' => $request->total_insurance_amount,
-                'beneficiary_type' => $request->beneficiary_type,
-                'beneficiary_status' => 'PENDING', //$request->beneficiary_status,
-                'file_name' => 'Picture 2x2',
-                'file_path' => basename($path),
-                'file_capture' => basename($path),
-                'status' => $request->status,
-                'remarks' => $request->remarks,
-                'interviewed_by' => $request->interviewed_by,
-            ]);
-
-
-            $data = [
-                'message_type' => 'success',
-                'message' => 'Successfully added TUPAD Beneficiary. Thank you.',
-                'action' => 'redirect-back-submit-beneficiary'
+                'message' => 'Error. This beneficiary already exists as a family member.',
+                'action' => 'redirect-back-submit-beneficiary-exist'
             ];
 
             return view('admin.Tupad.message', $data);
         }
 
+        // Validate add tupad beneficiaries form
+        $validator = Validator::make($request->all(), [
+            //beneficiary
+            'contact_number' => ['required', 'string', 'max:255'],
+            'email_address' => ['nullable', 'email'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_initial' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'name_extension' => ['nullable', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date'],
+            'age' => ['required', 'numeric'],
+            'gender' => ['required', 'string', 'max:255'],
+            'civil_status' => ['required', 'string', 'max:255'],
+            'region' => ['required', 'string', 'max:255'],
+            'province' => ['required', 'in:Cagayan de Oro City,Misamis Oriental,Misamis Occidental,Bukidnon,Lanao Del Norte,Camiguin'],
+            // 'complete_address' => ['required', 'string', 'max:255'],
+            'barangay' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:255'],
+            'designated_beneficiary' => ['nullable', 'string', 'max:255'],
+            'relationship_to_assured' => ['nullable', 'string', 'max:255'],
+            'period_of_employment_start' => ['required', 'date'],
+            'period_of_employment_end' => ['required', 'date'],
+            'total_insurance_amount' => ['required', 'numeric'],
+            'status' => ['nullable', 'string', 'max:255'],
+            'remarks' => ['nullable', 'string', 'max:255'],
+            'picture' => ['nullable', 'mimes:jpeg', 'max:20000'],
+            'capturedImageData' => ['nullable', 'mimes:jpeg', 'max:20000'],
+            'interviewed_by' => ['nullable', 'string', 'max:255'],
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $picture = $request->file('picture');
+        $capturedImageData = $request->file('captured_image_data');
+
+        if ($picture && $picture->isValid()) {
+            $path = $picture->store('tupadBeneficiariesPicture');
+        } elseif ($capturedImageData && $capturedImageData->isValid()) {
+            $path = $capturedImageData->store('tupadBeneficiariesPicture');
+        } else {
+            $path = ''; // or some default path
+        }
+
+        // If the validation passes, continue with your logic here
+        $Query = TupadEmployee::Create([
+            'tupad_id' => $checkReferenceProject->id,
+            'first_name' => $request->first_name,
+            'middle_initial' => $request->middle_initial,
+            'last_name' => $request->last_name,
+            'name_extension' => $request->name_extension,
+            'contact_number' => $request->contact_number,
+            'email_address' => $request->email_address,
+            'date_of_birth' => $request->date_of_birth,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'civil_status' => $request->civil_status,
+            'region' => 'REGION 10 ONLY',
+            'province' => $request->province,
+            'barangay' => $request->barangay,
+            'street' => $request->street,
+            'postal_code' => $request->postal_code,
+            'designated_beneficiary' => $request->designated_beneficiary,
+            'relationship_to_assured' => $request->relationship_to_assured,
+            'period_of_employment_start' => $request->period_of_employment_start,
+            'period_of_employment_end' => $request->period_of_employment_end,
+            'total_insurance_amount' => $request->total_insurance_amount,
+            'beneficiary_type' => $request->beneficiary_type,
+            'beneficiary_status' => 'PENDING', //$request->beneficiary_status,
+            'file_name' => 'Picture 2x2',
+            'file_path' => basename($path),
+            'file_capture' => basename($path),
+            'status' => $request->status,
+            'remarks' => $request->remarks,
+            'interviewed_by' => $request->interviewed_by,
+        ]);
+
+        $data = [
+            'message_type' => 'success',
+            'message' => 'Successfully added TUPAD Beneficiary. Thank you.',
+            'action' => 'redirect-back-submit-beneficiary'
+        ];
+
+        return view('admin.Tupad.message', $data);
     }
+}
 
     public function storeMember(Request $request)
     {
@@ -364,6 +373,8 @@ class TupadController extends Controller
             'name_extension' => ['nullable', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date'],
             'age' => ['required', 'numeric'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'civil_status' => ['nullable', 'string', 'max:255'],
             'region' => ['required', 'string', 'max:255'],
             'complete_address' => ['required', 'string', 'max:255'],
             'designated_beneficiary' => ['nullable', 'string', 'max:255'],
@@ -391,6 +402,8 @@ class TupadController extends Controller
             'email_address' => $request->email_address,
             'date_of_birth' => $request->date_of_birth,
             'age' => $request->age,
+            'gender' => $request->gender,
+            'civil_status' => $request->civil_status,
             'region' => 'REGION 10 ONLY',
             'province' => $request->province,
             'barangay' => $request->barangay,

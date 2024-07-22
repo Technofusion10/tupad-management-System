@@ -152,7 +152,7 @@
                             <!-- Row 4 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-6 mb-1">
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Date of Birth</label>
                                     <input name="date_of_birth" type="date" value="{{ old('date_of_birth') }}" class="form-control" id="" placeholder="Enter Date of Birth">
 
@@ -161,11 +161,40 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-6 mb-1">
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Age</label>
                                     <input name="age" type="text" value="{{ old('age') }}" class="form-control" id="" placeholder="Enter Your Age">
 
                                     @error('age')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
+                                    <label for="">Gender</label>
+                                    <select name="gender" class="form-control" id="">
+                                        <option value="" selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Prefer not to say">Prefer not to say</option>
+                                    </select>
+
+                                    @error('gender')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
+                                    <label for="">Civil Status</label>
+                                    <select name="civil_status" class="form-control" id="">
+                                        <option value="" selected>Select civil status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Widow">Widow</option>
+                                        <option value="Live in">Live in</option>
+                                    </select>
+
+                                    @error('civil_status')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>

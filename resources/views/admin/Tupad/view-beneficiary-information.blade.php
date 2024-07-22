@@ -59,6 +59,14 @@
                             </li>
 
                             <li class="list-group-item font-weight-bold">
+                                Gender: {{ $beneficiary->gender }}
+                            </li>
+
+                            <li class="list-group-item font-weight-bold">
+                                Civil Status: {{ $beneficiary->civil_status }}
+                            </li>
+
+                            <li class="list-group-item font-weight-bold">
                                 REGION: {{ $beneficiary->region }}
                             </li>
 

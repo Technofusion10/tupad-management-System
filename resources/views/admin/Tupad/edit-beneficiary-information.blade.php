@@ -178,20 +178,14 @@
                                 </div>
 
                                 <div class="col-lg-3 mb-1">
-                                    <label for="">Region</label>
-                                    <input
-                                        name="region"
-                                        type="text"
-                                        value="{{ $beneficiary->region }}"
-                                        class="form-control"
-                                        placeholder="Enter Region..."
-                                        readonly
-                                    >
+                                    <label for="">Gender</label>
+                                    <input type="text" name="gender" class="form-control" placeholder="Enter Gender" value="{{$beneficiary->gender}}">
 
-                                    @error('region')
+                                    @error('gender')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
+
 
                             </div>
                             <!-- End -->
@@ -200,35 +194,22 @@
                             <div class="row mb-3">
 
                                 <div class="col-lg-3 mb-1">
+                                    <label for="">Civil Status</label>
+                                    <input type="text" name="civil_status" class="form-control" placeholder="Enter civil status" value="{{$beneficiary->civil_status}}">
+
+                                    @error('civil_status')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Province</label>
-                                    <input
-                                        name="province"
-                                        type="text"
-                                        value="{{ $beneficiary->province }}"
-                                        class="form-control"
-                                        placeholder="Enter Province..."
-                                    >
+                                    <input type="text" name="province" class="form-control" placeholder="Enter province" value="{{$beneficiary->province}}">
 
                                     @error('province')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
-
-                                {{-- <div class="col-lg-4 mb-1">
-                                    <label for="">Complete Address</label>
-                                    <input
-                                        name="complete_address"
-                                        type="text"
-                                        value="{{ $beneficiary->complete_address }}"
-                                        class="form-control"
-                                        id=""
-                                        placeholder="Enter Complete Address..."
-                                    >
-
-                                    @error('complete_address')
-                                        <p style="color: red;">{{ $message }}</p>
-                                    @enderror
-                                </div> --}}
 
                                 <div class="col-lg-3 mb-1">
                                     <label for="">Barangay</label>
@@ -262,6 +243,14 @@
 
                                 </div>
 
+
+
+                            </div>
+                            <!-- End -->
+
+                            <!-- Row 3 -->
+                            <div class="row mb-3">
+
                                 <div class="col-lg-3 mb-1">
 
                                     <label for="">Postal Code</label>
@@ -279,12 +268,6 @@
 
                                 </div>
 
-                            </div>
-                            <!-- End -->
-
-                            <!-- Row 3 -->
-                            <div class="row mb-3">
-
                                 <div class="col-lg-3 mb-1">
                                     <label for="">Email Address</label>
                                     <input
@@ -300,7 +283,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-6 mb-1">
+                                <div class="col-lg-3 mb-1">
                                     <label for="">Designated Beneficiary</label>
                                     <input
                                         name="designated_beneficiary"
@@ -334,6 +317,25 @@
 
                             </div>
                             <!-- End -->
+
+                            <!-- row -->
+                            <div class="row mb-3">
+                                <div class="col-lg-12 mb-1">
+                                    <label for="">Region</label>
+                                    <input
+                                        name="region"
+                                        type="text"
+                                        value="{{ $beneficiary->region }}"
+                                        class="form-control"
+                                        placeholder="Enter Region..."
+                                        readonly
+                                    >
+
+                                    @error('region')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <!-- Row 4 -->
                             <div class="row mb-3">

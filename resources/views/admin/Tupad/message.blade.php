@@ -44,6 +44,14 @@
 
                         @endif
 
+                        @if($action == "redirect-back-submit-beneficiary-exist")
+
+                            <div class="text-center">
+                                <a  href="/dashboard/add-tupad-form" class="btn btn-primary btn-lg">Redirect Back</a>
+                            </div>
+
+                        @endif
+
                         @if($action == "redirect-back-submit-family")
 
                             <div class="text-center">
