@@ -45,6 +45,7 @@ class PDFController extends Controller
             'street' => $beneficiary->street,
             'province' => $beneficiary->province,
             'postal_code' => $beneficiary->postal_code,
+            'file_path' => $beneficiary->file_path,
             'date_today' => date('m/d/Y'),
             'qrcode' => $qrcode
         ];

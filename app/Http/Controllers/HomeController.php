@@ -97,6 +97,23 @@ class HomeController extends Controller
                 'totalDeniedBudget',
                 'percentage'
             ));
+        }else if($totalBudget == 0 || $totalInsurance == 0){
+            $percentage = 0;
+            $percentage1 = 0;
+            return view('home', compact(
+                //Beneficiary
+                'countingBeneficiaryTotals',
+                'totalPendingInsurance',
+                'totalApprovedInsurance',
+                'totalDeniedInsurance',
+                'percentage1',
+                //Project
+                'countingTupadTotals',
+                'totalPendingBudget',
+                'totalApprovedBudget',
+                'totalDeniedBudget',
+                'percentage'
+            ));
         }
 
         $percentage = ($totalApprovedBudget / $totalBudget) * 100;

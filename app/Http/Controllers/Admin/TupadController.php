@@ -43,6 +43,7 @@ class TupadController extends Controller
 
     public function store(Request $request)
     {
+
         // Fetch Project Information
         $checkReferenceProject= TupadInformation::where("project_reference", "=", $request->project_reference)->first();
         // dd($checkReferenceProject);
@@ -57,7 +58,7 @@ class TupadController extends Controller
 
             return view('admin.Tupad.message', $data);
         }
-        else
+        else if (!$checkReferenceProject == NULL)
         {
             // Validate add tupad beneficiaries form
             $validator = Validator::make($request->all(), [
@@ -82,7 +83,8 @@ class TupadController extends Controller
                 'total_insurance_amount' => ['required', 'numeric'],
                 'status' => ['nullable', 'string', 'max:255'],
                 'remarks' => ['nullable', 'string', 'max:255'],
-                'picture' => ['required','mimes:jpeg', 'max:20000'],
+                'picture' => ['nullable','mimes:jpeg', 'max:20000'],
+                'capturedImageData' => ['nullable','mimes:jpeg', 'max:20000'],
                 'interviewed_by' => ['nullable', 'string', 'max:255'],
 
             ]);
@@ -91,9 +93,18 @@ class TupadController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-
             $picture = $request->file('picture');
-            $path = $picture->store('tupadBeneficiariesPicture');
+            $capturedImageData = $request->file('captured_image_data');
+
+            if ($picture && $picture->isValid()) {
+                $path = $picture->store('tupadBeneficiariesPicture');
+            } elseif ($capturedImageData && $capturedImageData->isValid()) {
+                $path = $capturedImageData->store('tupadBeneficiariesPicture');
+            } else {
+                // Handle case where neither $picture nor $captured_image_data is uploaded or valid
+                // You may want to add appropriate error handling or fallback logic here
+                $path = ''; // or some default path
+            }
 
             // If the validation passes, continue with your logic here
             $Query = TupadEmployee::Create([
@@ -120,6 +131,7 @@ class TupadController extends Controller
                 'beneficiary_status' => 'PENDING', //$request->beneficiary_status,
                 'file_name' => 'Picture 2x2',
                 'file_path' => basename($path),
+                'file_capture' => basename($path),
                 'status' => $request->status,
                 'remarks' => $request->remarks,
                 'interviewed_by' => $request->interviewed_by,
@@ -198,7 +210,7 @@ class TupadController extends Controller
             $data = [
                 'message_type' => 'success',
                 'message' => 'Successfully added TUPAD Family Member. Thank you.',
-                'action' => 'redirect-back-submit-beneficiary'
+                'action' => 'redirect-back-submit-family'
             ];
 
             return view('admin.Tupad.message', $data);

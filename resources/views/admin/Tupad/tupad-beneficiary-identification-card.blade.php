@@ -74,6 +74,19 @@
 
         }
 
+        .text-picture
+        {
+            position: absolute;
+            top: 843px;
+            right: 220px;
+            background-color: #000000;
+            font-size: 9px;
+            font-weight: 300;
+            width: 200px;
+            text-align: center;
+
+        }
+
         .qr-code
         {
             position: absolute;
@@ -97,7 +110,9 @@
     <div class="block">
 
     </div>
-
+    {{-- <div class="text-picture">
+        <img style="margin-left: -220px;" src="{{$file_path}}" alt="IDpicture" width="100%" height="100%">
+    </div> --}}
     <p class="text-full-name">
         {{ $first_name }} {{ $middle_initial }} {{ $last_name }} {{ $name_extension }}
     </p>
@@ -114,8 +129,8 @@
 
     <p class="text-director">
 
-        ESTRELLA UY-PAHALLA <br>
-        OIC - REGIONAL DIRECTOR
+        Atty. Erwin N. Aquino <br>
+        REGIONAL DIRECTOR, DOLE-X
 
     </p>
 

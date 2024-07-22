@@ -17,7 +17,7 @@
                 View Project Info
             </a>
 
-            <a href="{{ '/print-identification-card-tupad/'.$beneficiary->id }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <a href="{{ '/print-identification-card-tupad/'.$beneficiary->id }}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fa fa-id-card fa-sm text-white-50">
 
                 </i>
@@ -133,7 +133,7 @@
 
                             <li class="list-group-item font-weight-bold">
 
-                                <a href="{{ '/image/'.$beneficiary->file_path }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <a href="{{ '/image/'.$beneficiary->file_path }}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                     <i class="fa fa-id-card fa-sm text-white-50">
 
                                     </i>
@@ -173,10 +173,10 @@
                                                     <th class="border border-dark">Last Name</th>
                                                     <th class="border border-dark">Gender</th>
                                                     <th class="border border-dark">Age</th>
-                                                    <th class="border border-dark">Date of Birth</th>
-                                                    <th class="border border-dark">Mobile No</th>
+                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
+                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
                                                     <th class="border border-dark">Civil Status</th>
-                                                    <th class="border border-dark">Address</th>
+                                                    {{-- <th class="border border-dark">Address</th> --}}
                                                     <th class="border border-dark">Relationship</th>
                                                     <th class="border border-dark">Action</th>
                                                  </tr>
@@ -189,10 +189,10 @@
                                                     <th class="border border-dark">Last Name</th>
                                                     <th class="border border-dark">Gender</th>
                                                     <th class="border border-dark">Age</th>
-                                                    <th class="border border-dark">Date of Birth</th>
-                                                    <th class="border border-dark">Mobile No</th>
+                                                    {{-- <th class="border border-dark">Date of Birth</th> --}}
+                                                    {{-- <th class="border border-dark">Mobile No</th> --}}
                                                     <th class="border border-dark">Civil Status</th>
-                                                    <th class="border border-dark">Address</th>
+                                                    {{-- <th class="border border-dark">Address</th> --}}
                                                     <th class="border border-dark">Relationship</th>
                                                     <th class="border border-dark">Action</th>
                                                 </tr>
@@ -207,10 +207,10 @@
                                                             <td class="border border-dark">{{$familyMember->Family_Lname}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_gender}}</td>
                                                             <td class="border border-dark">{{$familyMember->Family_age}}</td>
-                                                            <td class="border border-dark">{{$familyMember->Family_birth}}</td>
-                                                            <td class="border border-dark">{{$familyMember->Family_mobile}}</td>
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_birth}}</td> --}}
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_mobile}}</td> --}}
                                                             <td class="border border-dark">{{$familyMember->Family_Cstatus}}</td>
-                                                            <td class="border border-dark">{{$familyMember->Family_address}}</td>
+                                                            {{-- <td class="border border-dark">{{$familyMember->Family_address}}</td> --}}
                                                             <td class="border border-dark">{{$familyMember->Family_Relationship}}</td>
                                                             <td class="border border-dark">
                                                                 <a href="{{'/dashboard/tupad-beneficiary-family-information/edit/'.$familyMember->id}}" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">edit</a>
@@ -452,7 +452,7 @@
     <!-- Modal -- Add Family -->
     <div class="modal fade" id="addFamilyMember" tabindex="-1" role="dialog" aria-labelledby="addFamilyMemberLabel" aria-hidden="true">
         <div
-        class="modal-dialog"
+        class="modal-dialog modal-lg"
         style="
             border: 5px solid #6c6c6c;
             border-radius: 8px;
@@ -492,7 +492,7 @@
                         </div>
                         <!-- End -->
 
-                        <!-- Row 1 -->
+                        <!-- Row 2 -->
                         <div class="row mb-3">
 
                             <div class="col-lg-12 mb-1">
@@ -509,10 +509,10 @@
                         </div>
                         <!-- End -->
 
-                        <!-- Row 2 -->
+                        <!-- Row 3 -->
                         <div class="row mb-3">
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
 
                                 <label for="">First Name</label>
                                 <input name="Family_Fname" type="text" value="{{ old('Family_Fname') }}" class="form-control" id="" placeholder="Enter First Name">
@@ -523,7 +523,7 @@
 
                             </div>
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
 
                                 <label for="">Middle Name</label>
                                 <input name="Family_Mname" type="text" value="{{ old('Family_Mname') }}" class="form-control" id="" placeholder="Enter Middle Name">
@@ -534,29 +534,12 @@
 
                             </div>
 
-                        </div>
-                        <!-- End -->
-
-                        <!-- Row 3 -->
-                        <div class="row mb-3">
-
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
 
                                 <label for="">Last Name</label>
                                 <input name="Family_Lname" type="text" value="{{ old('Family_Lname') }}" class="form-control" id="" placeholder="Enter Last Name">
 
                                 @error('Family_Lname')
-                                    <p style="color: red;">{{ $message }}</p>
-                                @enderror
-
-                            </div>
-
-                            <div class="col-lg-6 mb-1">
-
-                                <label for="">Gender</label>
-                                <input name="Family_gender" type="text" value="{{ old('Family_gender') }}" class="form-control" id="" placeholder="Enter Gender">
-
-                                @error('Family_gender')
                                     <p style="color: red;">{{ $message }}</p>
                                 @enderror
 
@@ -568,7 +551,18 @@
                         <!-- Row 4 -->
                         <div class="row mb-3">
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
+
+                                <label for="">Gender</label>
+                                <input name="Family_gender" type="text" value="{{ old('Family_gender') }}" class="form-control" id="" placeholder="Enter Gender">
+
+                                @error('Family_gender')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-lg-4 mb-1">
                                 <label for="">Date of Birth</label>
                                 <input name="Family_birth" type="date" value="{{ old('Family_birth') }}" class="form-control" id="" placeholder="Enter Date of Birth">
 
@@ -577,7 +571,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
                                 <label for="">Age</label>
                                 <input name="Family_age" type="text" value="{{ old('Family_age') }}" class="form-control" id="" placeholder="Enter Your Age">
 
@@ -585,13 +579,14 @@
                                     <p style="color: red;">{{ $message }}</p>
                                 @enderror
                             </div>
+
                         </div>
                         <!-- End -->
 
                         <!-- Row 5 -->
                         <div class="row mb-3">
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
 
                                 <label for="">Mobile No.</label>
                                 <input name="Family_mobile" type="text" value="{{ old('Family_mobile') }}" class="form-control" id="" placeholder="Enter Mobile No.">
@@ -602,29 +597,12 @@
 
                             </div>
 
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-4 mb-1">
 
                                 <label for="">Civil Status</label>
                                 <input name="Family_Cstatus" type="text" value="{{ old('Family_Cstatus') }}" class="form-control" id="" placeholder="Enter Civil Status">
 
                                 @error('Family_Cstatus')
-                                    <p style="color: red;">{{ $message }}</p>
-                                @enderror
-
-                            </div>
-
-                        </div>
-                        <!-- End -->
-
-                        <!-- Row 1 -->
-                        <div class="row mb-3">
-
-                            <div class="col-lg-8 mb-1">
-
-                                <label for="">ADDRESS</label>
-                                <input name="Family_address" type="text" value="{{ old('Family_address') }}" class="form-control" id="" placeholder="Enter Address">
-
-                                @error('Family_address')
                                     <p style="color: red;">{{ $message }}</p>
                                 @enderror
 
@@ -636,6 +614,23 @@
                                 <input name="Family_Relationship" type="text" value="{{ old('Family_Relationship') }}" class="form-control" id="" placeholder="Enter Relationship">
 
                                 @error('Family_Relationship')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                        <!-- End -->
+
+                        <!-- Row 6 -->
+                        <div class="row mb-3">
+
+                            <div class="col-lg-12 mb-1">
+
+                                <label for="">ADDRESS</label>
+                                <input name="Family_address" type="text" value="{{ old('Family_address') }}" class="form-control" id="" placeholder="Enter Address">
+
+                                @error('Family_address')
                                     <p style="color: red;">{{ $message }}</p>
                                 @enderror
 
@@ -656,6 +651,7 @@
         </div>
     </div>
     <!--end of modal family member-->
+
 
     <!--Family Information-->
     {{-- <div class="modal fade" id="familyInfo" tabindex="-1" role="dialog" aria-labelledby="familyInfoLabel" aria-hidden="true">

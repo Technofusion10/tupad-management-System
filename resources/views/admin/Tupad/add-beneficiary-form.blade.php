@@ -10,9 +10,9 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Add Tupad Beneficiaries</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-            </a>
+            </a> --}}
         </div>
 
         <div class="row">
@@ -222,7 +222,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 6 -->
+                            <!-- Row 7 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-4 mb-1">
@@ -239,8 +239,8 @@
 
                                 <div class="col-lg-4 mb-1">
 
-                                    <label for="">Street No.</label>
-                                    <input name="street" type="text" value="{{ old('street') }}" class="form-control" id="" placeholder="Enter Street">
+                                    <label for="">Street No./Subdivision</label>
+                                    <input name="street" type="text" value="{{ old('street') }}" class="form-control" id="" placeholder="Enter Street/Subdivision">
 
                                     @error('street')
                                         <p style="color: red;">{{ $message }}</p>
@@ -251,7 +251,7 @@
                                 <div class="col-lg-4 mb-1">
 
                                     <label for="">Postal Code.</label>
-                                    <input name="postal_code" type="text" value="{{ old('postal_code') }}" class="form-control" id="" placeholder="Enter Street">
+                                    <input name="postal_code" type="text" value="{{ old('postal_code') }}" class="form-control" id="" placeholder="Enter Postal Code">
 
                                     @error('postal_code')
                                         <p style="color: red;">{{ $message }}</p>
@@ -262,7 +262,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 7 -->
+                            <!-- Row 8 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-6 mb-1">
@@ -290,7 +290,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 8 -->
+                            <!-- Row 9 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-6 mb-1">
@@ -318,7 +318,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 9 -->
+                            <!-- Row 10 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
@@ -335,7 +335,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 10 -->
+                            <!-- Row 11 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
@@ -352,7 +352,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 11 -->
+                            <!-- Row 12 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
@@ -369,7 +369,7 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 12 -->
+                            <!-- Row 13 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
@@ -385,14 +385,15 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 13 -->
+                            <!-- Row 14 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
-                                    <label for="">Upload Valid ID</label>
+                                    <label for="">Upload 2x2 Picture or Capture Beneficiary </label>
 
                                     <div class="col-lg-12 mb-1 text-center">
-                                        <input type="file" name="picture" accept="jpeg" class="form-control">
+                                        {{-- <input type="file" name="picture" accept="jpeg" class="form-control"> --}}
+                                        <input type="file" name="picture" id="file-input" accept="image/*" class="form-control">
                                     </div>
 
                                     @error('picture')
@@ -403,7 +404,26 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 14 -->
+                            <!-- Row 15 -->
+                            <div class="row mb-3">
+
+                                <div class="col-lg-12 mb-1">
+
+                                    <div class="col-lg-12 mb-1">
+                                        <a data-toggle="modal" data-target="#capture" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            CAPTURE BENEFICIARY<i class="fa-solid fa-camera ml-2"></i>
+                                        </a>
+                                    </div>
+
+                                    @error('picture')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                            </div>
+                            <!-- End -->
+
+                            <!-- Row 16 -->
                             <div class="row mb-3">
 
                                 <div class="col-lg-12 mb-1">
@@ -417,10 +437,10 @@
                             </div>
                             <!-- End -->
 
-                            <!-- Row 15 -->
+                            <!-- Row 17 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-12 mb-1 text-center">
+                                <div class="col-lg-12 mb                                                     w3waw-1 text-center">
                                     <button type="submit" class="btn btn-primary btn-lg">Add Beneficiary</button>
                                 </div>
 
@@ -434,6 +454,101 @@
             </div>
         </div>
 
+        <!-- Modal -- Capture -->
+        <div class="modal fade" id="capture" tabindex="-1" role="dialog" aria-labelledby="captureLabel" aria-hidden="true">
+            <div
+                class="modal-dialog modal-lg"
+                style="
+                    border: 5px solid #6c6c6c;
+                    border-radius: 8px;
+                    "
+                role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h6 class="m-0 font-weight-bold text-primary">TUPAD Program - Add Beneficiaries</h6>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 mb-1 text-center">
+                                <h1>Capture Image</h1>
+                                <div>
+                                    <video id="video" autoplay></video><br>
+                                    <button id="capture" class="btn btn-primary btn-lg">Capture</button>
+                                    <canvas id="canvas" hidden></canvas>
+                                </div>
+                                <div>
+                                    <img id="captured-image" src="" alt="Captured Image" class="mx-auto"><br>
+                                    <button id="upload" class="btn btn-success btn-lg">Upload</button>
+                                </div>
+                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                const video = document.getElementById('video');
+                                const canvas = document.getElementById('canvas');
+                                const captureButton = document.getElementById('capture');
+                                const capturedImage = document.getElementById('captured-image');
+                                const fileInput = document.getElementById('file-input');
+                                const uploadButton = document.getElementById('upload');
+
+                                // Access the device camera and stream to video element
+                                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                                    navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                                        video.srcObject = stream;
+                                        video.play();
+                                    });
+                                }
+
+                                // Capture the image when capture button is clicked
+                                captureButton.addEventListener('click', function () {
+                                    const context = canvas.getContext('2d');
+                                    canvas.width = video.videoWidth;
+                                    canvas.height = video.videoHeight;
+                                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                                    // Display the captured image
+                                    capturedImage.src = canvas.toDataURL('image/jpeg');
+                                    capturedImage.style.display = 'block';
+                                });
+
+                                // Upload the captured image
+                                uploadButton.addEventListener('click', function () {
+                                    const dataUrl = canvas.toDataURL('image/jpeg');
+                                    const blob = dataURLToBlob(dataUrl);
+                                    const file = new File([blob], "captured-image.jpeg", { type: "image/jpeg" });
+
+                                    // Create a data transfer to add the file
+                                    const dataTransfer = new DataTransfer();
+                                    dataTransfer.items.add(file);
+                                    fileInput.files = dataTransfer.files;
+
+                                    console.log('File ready for upload:', fileInput.files[0]);
+                                    // You can now upload the file to your server
+                                });
+
+                                function dataURLToBlob(dataUrl) {
+                                    const parts = dataUrl.split(';base64,');
+                                    const byteString = atob(parts[1]);
+                                    const mimeString = parts[0].split(':')[1];
+                                    const ab = new ArrayBuffer(byteString.length);
+                                    const ia = new Uint8Array(ab);
+                                    for (let i = 0; i < byteString.length; i++) {
+                                        ia[i] = byteString.charCodeAt(i);
+                                    }
+                                    return new Blob([ab], { type: mimeString });
+                                }
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.container-fluid -->
 

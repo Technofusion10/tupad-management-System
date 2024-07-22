@@ -23,7 +23,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-login-image">
-                        <img src="{{asset('images/dolee.png')}}" alt="img" style="height: 100%; width: 426px;">
+                        <img src="{{asset('images/dole3D.jpg')}}" alt="img" style="height: 100%; width: 426px;">
                     </div>
                     <div class="col-lg-7">
                         <div class="pt-5 pl-5 pb-5 pr-4">

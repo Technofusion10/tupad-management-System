@@ -54,6 +54,7 @@ return new class extends Migration
 
             $table->string('file_name', 255)->nullable();
             $table->string('file_path', 355)->nullable();
+            $table->string('file_capture', 355)->nullable();
 
             $table->string('status')->nullable();
             $table->string('remarks')->nullable();
