@@ -27,7 +27,10 @@ return new class extends Migration
             $table->string('Family_birth');
             $table->string('Family_mobile');
             $table->string('Family_Cstatus');
-            $table->string('Family_address');
+            $table->string('Family_province');
+            $table->string('Family_barangay');
+            $table->string('Family_street');
+            $table->string('Family_postalcode');
             $table->string('Family_Relationship');
             $table->timestamps();
         });

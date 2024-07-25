@@ -47,7 +47,29 @@
                         @if($action == "redirect-back-submit-beneficiary-exist")
 
                             <div class="text-center">
-                                <a  href="/dashboard/add-tupad-form" class="btn btn-primary btn-lg">Redirect Back</a>
+                                <a  href="/dashboard/add-tupad-form" class="btn btn-primary btn-lg mb-3">Redirect Back</a>
+
+
+
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-12 mb-1">
+                                    <ul class="list-group">
+                                        <li class="list-group-item font-weight-bold">
+                                            Beneficiary ID: {{$existingFamilyMember->employee_id}}
+                                            <a class="collapse-item" href="/dashboard/tupad-beneficiaries-table">Beneficiaries Table</a>
+                                        </li>
+                                        <li class="list-group-item font-weight-bold">Family ID: {{$existingFamilyMember->id}}</li>
+                                        {{-- <li class="list-group-item font-weight-bold">Beneficiary Address: {{$existingFamilyMember->Family_province}}, {{$existingFamilyMember->Family_barangay}},{{$existingFamilyMember->Family_street}}, {{$existingFamilyMember->Family_postalcode}}</li> --}}
+                                        <li class="list-group-item font-weight-bold">Relationship to beneficiary: {{$existingFamilyMember->Family_Relationship}}</li>
+                                        <li class="list-group-item font-weight-bold">Family Fullname: {{$existingFamilyMember->Family_Fname}} {{$existingFamilyMember->Family_Mname}} {{$existingFamilyMember->Family_Lname}} </li>
+                                        <li class="list-group-item font-weight-bold">Family Civil Status: {{$existingFamilyMember->Family_Cstatus}}</li>
+                                        {{-- <li class="list-group-item font-weight-bold">Family Address: {{$existingFamilyMember->Family_province}}, {{$existingFamilyMember->Family_barangay}},{{$existingFamilyMember->Family_street}}, {{$existingFamilyMember->Family_postalcode}}</li> --}}
+                                        <li class="list-group-item font-weight-bold">Family date created: {{$existingFamilyMember->created_at}}</li>
+
+
+                                    </ul>
+                                </div>
                             </div>
 
                         @endif
@@ -72,3 +94,30 @@
     <!-- /.container-fluid -->
 
 @endsection
+
+{{-- <table class="table table-hover text-center">
+                                            <thead class="border bg-gray-500 text-dark">
+                                                <tr>
+                                                    <th class="border border-dark">Family ID</th>
+                                                    <th class="border border-dark">Family First Name</th>
+                                                    <th class="border border-dark">Family Middle Name</th>
+                                                    <th class="border border-dark">Family Last Name</th>
+                                                    <th class="border border-dark">Beneficiary Name</th>
+                                                 </tr>
+                                            </thead>
+                                            <tbody class="border bg-gray-200">
+                                                @foreach ($beneficiaryFamily as $familyMember)
+                                                    <tr>
+                                                        <td class="border border-dark">{{$familyMember->id}}</td>
+                                                        <td class="border border-dark">{{$familyMember->Family_Fname}}</td>
+                                                        <td class="border border-dark">{{$familyMember->Family_Mname}}</td>
+                                                        <td class="border border-dark">{{$familyMember->Family_Lname}}</td>
+                                                        <td class="border border-dark">1</td>
+                                                        <td class="border border-dark">Isaiah</td>
+                                                        <td class="border border-dark">Ramos</td>
+                                                        <td class="border border-dark">Jimoya</td>
+                                                        <td class="border border-dark">Matthew Ramos Jimoya</td>
+                                                    </tr>
+                                                @endforeach
+                                        </tbody>
+                                        </table> --}}

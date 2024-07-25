@@ -35,6 +35,7 @@ class PDFController extends Controller
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate('http://e-dilpms.dolexportal.com/Identification/'.$encrypted));
 
         $data = [
+            'beneficiary'=> $beneficiary,
             'id' => $beneficiary->id,
             'first_name' => $beneficiary->first_name,
             'middle_initial' => $beneficiary->middle_initial,
@@ -46,9 +47,12 @@ class PDFController extends Controller
             'province' => $beneficiary->province,
             'postal_code' => $beneficiary->postal_code,
             'file_path' => $beneficiary->file_path,
+            'file_capture' => $beneficiary->file_capture,
             'date_today' => date('m/d/Y'),
             'qrcode' => $qrcode
         ];
+
+        // dd($data);
 
         //$pdf = PDF::loadView('main.inventory.view_pdf', compact('qrcode'));
         //return $pdf->stream();

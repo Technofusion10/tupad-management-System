@@ -77,14 +77,17 @@
         .text-picture
         {
             position: absolute;
-            top: 843px;
-            right: 220px;
-            background-color: #000000;
+            top: 237px;
+            right: 278px;
             font-size: 9px;
             font-weight: 300;
-            width: 200px;
             text-align: center;
 
+        }
+
+        .text-picture img{
+            width: 80px;
+            height: 83px;
         }
 
         .qr-code
@@ -110,8 +113,11 @@
     <div class="block">
 
     </div>
+    <div class="text-picture">
+        {{-- <img src="{{ route('tupadBeneficiariesPicture'.$beneficiary->file_path) }}" alt="Image"> --}}
+    </div>
     {{-- <div class="text-picture">
-        <img style="margin-left: -220px;" src="{{$file_path}}" alt="IDpicture" width="100%" height="100%">
+        <img src="{{ public_path('images/CtE0XqfKOVkKrGg59mGwjSVLcdu1RVJYrzpKcfJL.jpg') }}" alt="id">
     </div> --}}
     <p class="text-full-name">
         {{ $first_name }} {{ $middle_initial }} {{ $last_name }} {{ $name_extension }}

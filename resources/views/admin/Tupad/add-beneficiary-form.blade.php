@@ -352,14 +352,49 @@
 
                                 <div class="col-lg-12 mb-1">
 
-                                    <label for="">Beneficiary Type</label>
-                                    <input name="beneficiary_type" type="text" value="{{ old('beneficiary_type') }}" class="form-control" id="" placeholder="Enter Beneficiary Type">
+                                        <label for="">Beneficiary Type</label>
+                                        <select name="beneficiary_type" class="form-control" id="options" onchange="updateInput()">
+                                            <option value="">
+                                                Select Beneficiary Type
+                                            </option>
+                                            <option value="Person With Disability - PWD">
+                                                Person With Disability - PWD
+                                            </option>
+                                            <option value="Geographically Isolated and Disadvantage Areas - GIDA">
+                                                Geographically Isolated and Disadvantage Areas - GIDA
+                                            </option>
+                                            <option value="Indigenos Peoples - IP's">
+                                                Indigenos Peoples - IP's
+                                            </option>
+                                            <option value="Former Rebels - FR's">
+                                                Former Rebels - FR's</option>
+                                            <option value="Senior Citizen">
+                                                Senior Citizen
+                                            </option>
+                                            <option value="Parents of Child Laborer - PCL">
+                                                Parents of Child Laborer - PCL
+                                            </option>
+                                        </select>
+                                        <label for="beneficiary_type" class="mt-3">Other Beneficiary Type:</label>
+                                        <input type="text" class="form-control" id="other-input" name="beneficiary_type" placeholder="Enter Other Beneficiary Type">
+
+
+                                        <script>
+                                            function updateInput()
+                                            {
+                                                var select = document.getElementById('options');
+                                                var input = document.getElementById('other-input');
+                                                input.value = select.value;
+                                            }
+                                        </script>
+
 
                                     @error('beneficiary_type')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
 
                                 </div>
+
 
                             </div>
                             <!-- End -->
@@ -469,7 +504,7 @@
                             <!-- Row 17 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-12 mb                                                     w3waw-1 text-center">
+                                <div class="col-lg-12 mb-1 text-center">
                                     <button type="submit" class="btn btn-primary btn-lg">Add Beneficiary</button>
                                 </div>
 

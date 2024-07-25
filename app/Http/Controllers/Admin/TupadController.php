@@ -55,21 +55,38 @@ class TupadController extends Controller
 
         return view('admin.Tupad.message', $data);
     } else {
+        // $familyMember = DB::table('family_members')
+        //     ->join('tupad_employees', 'family_members.id', '=', 'tupad_employees.id')
+        //     ->select('family_members.*', 'tupad_employees.first_name','tupad_employees.middle_initial','tupad_employees.last_name','tupad_employees.province','tupad_employees.barangay','tupad_employees.postal_code','tupad_employees.street','tupad_employees.created_at','tupad_employees.interviewed_by')
+        //     ->get();
         // Check if beneficiary already exists in family members
         $existingFamilyMember = FamilyMember::where('Family_Fname', $request->first_name)
             ->where('Family_Mname', $request->middle_initial)
             ->where('Family_Lname', $request->last_name)
+            ->where('Family_Cstatus', $request->civil_status)
+            // ->where('Family_province', $request->province)
+            // ->where('Family_barangay', $request->barangay)
+            // ->where('Family_street', $request->street)
+            // ->where('Family_postalcode', $request->postal_code)
             ->first();
 
         if ($existingFamilyMember) {
             $data = [
+                'existingFamilyMember' => $existingFamilyMember,
                 'message_type' => 'error',
-                'message' => 'Error. This beneficiary already exists as a family member.',
+                'message' => 'Error. This beneficiary already exists as a family member. please look the beneficiary ID in the Beneficiary TABLE to see the detail',
                 'action' => 'redirect-back-submit-beneficiary-exist'
             ];
 
+            // return view('admin.Tupad.message', [
+            //     'data' => $data,
+            //     'familyMember' => $familyMember,
+            //     'beneficiary' => $beneficiary
+            // ]);
+
             return view('admin.Tupad.message', $data);
         }
+
 
         // Validate add tupad beneficiaries form
         $validator = Validator::make($request->all(), [
@@ -190,7 +207,10 @@ class TupadController extends Controller
                 'Family_birth' => ['required', 'date'],
                 'Family_mobile' => ['required', 'string', 'max:255'],
                 'Family_Cstatus' => ['required', 'string', 'max:255'],
-                'Family_address' => ['required', 'string', 'max:255'],
+                'Family_province' => ['required', 'string', 'max:255'],
+                'Family_barangay' => ['required', 'string', 'max:255'],
+                'Family_street' => ['required', 'string', 'max:255'],
+                'Family_postalcode' => ['required', 'string', 'max:255'],
                 'Family_Relationship' => ['required', 'string', 'max:255'],
 
 
@@ -212,7 +232,10 @@ class TupadController extends Controller
                 'Family_birth' => $request->Family_birth,
                 'Family_mobile' => $request->Family_mobile,
                 'Family_Cstatus' => $request->Family_Cstatus,
-                'Family_address' => $request->Family_address,
+                'Family_province' => $request->Family_province,
+                'Family_barangay' => $request->Family_barangay,
+                'Family_street' => $request->Family_street,
+                'Family_postalcode' => $request->Family_postalcode,
                 'Family_Relationship' => $request->Family_Relationship,
             ]);
 
@@ -463,7 +486,10 @@ class TupadController extends Controller
             'Family_birth' => $request->Family_birth ,
             'Family_mobile' => $request->Family_mobile ,
             'Family_Cstatus' => $request->Family_Cstatus ,
-            'Family_address' => $request->Family_address ,
+            'Family_province' => $request->Family_province,
+            'Family_barangay' => $request->Family_barangay,
+            'Family_street' => $request->Family_street,
+            'Family_postalcode' => $request->Family_postalcode,
             'Family_Relationship' => $request->Family_Relationship ,
         ]);
         // dd($updateFamily);

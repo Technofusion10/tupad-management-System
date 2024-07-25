@@ -398,13 +398,13 @@
                                 </div>
 
                                 <div class="col-lg-4 mb-1">
-                                    <label for="">Beneficiary Type</label>
-                                    <input
+
+                                        <label for="">Beneficiary Type</label>
+                                        <input
                                         name="beneficiary_type"
                                         type="text"
                                         value="{{ $beneficiary->beneficiary_type }}"
                                         class="form-control"
-                                        placeholder="Enter Beneficiary Type..."
                                     >
 
                                     @error('beneficiary_type')

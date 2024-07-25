@@ -696,12 +696,12 @@
     <!-- Modal -- Add Beneficiary -->
     <div class="modal fade" id="addBeneficiary" tabindex="-1" role="dialog" aria-labelledby="addBeneficiaryLabel" aria-hidden="true">
         <div
-        class="modal-dialog modal-lg"
-        style="
-            border: 5px solid #6c6c6c;
-            border-radius: 8px;
-            "
-        role="document">
+            class="modal-dialog modal-lg"
+            style="
+                border: 5px solid #6c6c6c;
+                border-radius: 8px;
+                "
+            role="document">
 
             <div class="modal-content">
 
@@ -844,6 +844,34 @@
 
                         </div>
                         <!-- End -->
+
+                        <div class="row mb-3">
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Gender</label>
+                                <select name="gender" class="form-control" id="">
+                                    <option value="" selected>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+
+                                @error('gender')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col-lg-6 mb-1">
+                                <label for="">Civil Status</label>
+                                <select name="civil_status" class="form-control" id="">
+                                    <option value="" selected>Select civil status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widow">Widow</option>
+                                    <option value="Live in">Live in</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <!-- Row 5 -->
                         <div class="row mb-3">
@@ -996,7 +1024,40 @@
                             <div class="col-lg-12 mb-1">
 
                                 <label for="">Beneficiary Type</label>
-                                <input name="beneficiary_type" type="text" value="{{ old('beneficiary_type') }}" class="form-control" id="" placeholder="Enter Beneficiary Type">
+                                <select name="beneficiary_type" class="form-control" id="options" onchange="updateInput()">
+                                    <option value="">
+                                        Select Beneficiary Type
+                                    </option>
+                                    <option value="Person With Disability - PWD">
+                                        Person With Disability - PWD
+                                    </option>
+                                    <option value="Geographically Isolated and Disadvantage Areas - GIDA">
+                                        Geographically Isolated and Disadvantage Areas - GIDA
+                                    </option>
+                                    <option value="Indigenos Peoples - IP's">
+                                        Indigenos Peoples - IP's
+                                    </option>
+                                    <option value="Former Rebels - FR's">
+                                        Former Rebels - FR's</option>
+                                    <option value="Senior Citizen">
+                                        Senior Citizen
+                                    </option>
+                                    <option value="Parents of Child Laborer - PCL">
+                                        Parents of Child Laborer - PCL
+                                    </option>
+                                </select>
+                                <label for="beneficiary_type" class="mt-3">Other Beneficiary Type:</label>
+                                <input type="text" class="form-control" id="other-input" name="beneficiary_type" placeholder="Enter Other Beneficiary Type">
+
+
+                                <script>
+                                    function updateInput()
+                                    {
+                                        var select = document.getElementById('options');
+                                        var input = document.getElementById('other-input');
+                                        input.value = select.value;
+                                    }
+                                </script>
 
                                 @error('beneficiary_type')
                                     <p style="color: red;">{{ $message }}</p>

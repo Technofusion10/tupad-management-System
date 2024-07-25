@@ -197,21 +197,58 @@
                             </div>
                             <!-- End -->
 
+                            <div class="row mb-3">
+                                <div class="col-lg-12 mb-1">
+                                    <label for="">PROVINCE</label>
+                                    <select name="Family_province" class="form-control" id="">
+                                        <option value="" selected>Select Province</option>
+                                        <option value="Cagayan de Oro City">Cagayan de Oro City</option>
+                                        <option value="Misamis Oriental">Misamis Oriental</option>
+                                        <option value="Misamis Occidental">Misamis Occidental</option>
+                                        <option value="Lanao Del Norte">Lanao Del Norte</option>
+                                        <option value="Bukidnon">Bukidnon</option>
+                                        <option value="Camiguin">Camiguin</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <!-- Row 1 -->
                             <div class="row mb-3">
 
-                                <div class="col-lg-8 mb-1">
+                                <div class="col-lg-3 mb-1">
 
-                                    <label for="">ADDRESS</label>
-                                    <input name="Family_address" type="text" value="{{$familyMember->Family_address}}" class="form-control" id="" placeholder="Enter Address">
+                                    <label for="">Barangay</label>
+                                    <input name="Family_barangay" type="text" value="{{$familyMember->Family_barangay}}" class="form-control" id="" placeholder="Enter Barangay">
 
-                                    @error('Family_address')
+                                    @error('Family_barangay')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
 
                                 </div>
 
-                                <div class="col-lg-4 mb-1">
+                                <div class="col-lg-3 mb-1">
+
+                                    <label for="">Street No./Subdivision</label>
+                                    <input name="Family_street" type="text" value="{{$familyMember->Family_street}}" class="form-control" id="" placeholder="Enter Street No./Subdivision">
+
+                                    @error('Family_street')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
+
+                                    <label for="">Postal Code</label>
+                                    <input name="Family_postalcode" type="text" value="{{$familyMember->Family_postalcode}}" class="form-control" id="" placeholder="Enter Postal Code">
+
+                                    @error('Family_postalcode')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+
+                                </div>
+
+                                <div class="col-lg-3 mb-1">
 
                                     <label for="">Relationship</label>
                                     <input name="Family_Relationship" type="text" value="{{$familyMember->Family_Relationship}}" class="form-control" id="" placeholder="Enter Relationship">

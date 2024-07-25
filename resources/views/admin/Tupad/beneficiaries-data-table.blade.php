@@ -91,6 +91,7 @@
 
                         <thead>
                             <tr class="text-center">
+                                <th>ID</th>
                                 <th>FULL NAME</th>
                                 <th>EMPLOYMENT PERIOD</th>
                                 <th>PROVINCE</th>
@@ -101,6 +102,7 @@
 
                         <tfoot>
                             <tr class="text-center">
+                                <th>ID</th>
                                 <th>FULL NAME</th>
                                 <th>EMPLOYMENT PERIOD</th>
                                 <th>PROVINCE</th>
@@ -113,6 +115,7 @@
                             @foreach ($tupadBeneficiaries as $beneficiary)
 
                                 <tr class="text-center">
+                                    <td>{{ $beneficiary->id }}</td>
                                     <td>{{ $beneficiary->first_name }} {{ $beneficiary->middle_initial }} {{ $beneficiary->last_name }} {{ $beneficiary->name_extension }}</td>
                                     <td>{{ \Carbon\Carbon::parse($beneficiary->period_of_employment_start)->format('M d, Y') }} - {{ \Carbon\Carbon::parse($beneficiary->period_of_employment_end)->format('M d, Y') }} </td>
                                     <td>{{ $beneficiary->province }}</td>
